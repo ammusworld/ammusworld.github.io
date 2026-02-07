@@ -1,0 +1,38 @@
+.container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 100;
+}
+
+.gifWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+.gif {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 60px rgba(255, 105, 180, 0.4);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.in {
+  opacity: 1;
+}
+
+.out {
+  opacity: 0;
+}
+
+

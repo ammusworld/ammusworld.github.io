@@ -103,6 +103,13 @@ export const FinaleScreen: React.FC<FinaleScreenProps> = ({
         )}
       </div>
       
+      {/* Footer */}
+      {animationPhase >= 4 && (
+        <div className={styles.footer}>
+          With love, Kuchu 💕
+        </div>
+      )}
+      
       {/* Hearts around text */}
       <div className={styles.decorativeHearts}>
         {['💕', '💗'].map((heart, i) => (

@@ -1,11 +1,11 @@
-import type { MapData } from '../types/game'
+import type { MapData, StreetLabel } from '../types/game'
 import { TileType } from '../types/game'
 
 const T = TileType
 
 // Map dimensions
-const WIDTH = 40
-const HEIGHT = 30
+const WIDTH = 45
+const HEIGHT = 35
 
 // Helper to create a row filled with a tile type
 function fillRow(tile: typeof T[keyof typeof T], width: number = WIDTH): typeof T[keyof typeof T][] {
@@ -17,7 +17,31 @@ function emptyObjectRow(width: number = WIDTH): null[] {
   return new Array<null>(width).fill(null)
 }
 
-// Create ground layer - mostly grass with paths
+// Helper to draw a horizontal paved road
+function drawHorizontalRoad(ground: typeof T[keyof typeof T][][], y: number, startX: number, endX: number): void {
+  for (let x = startX; x <= endX; x++) {
+    if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH) {
+      ground[y][x] = T.PAVED_PATH
+    }
+    if (y + 1 >= 0 && y + 1 < HEIGHT && x >= 0 && x < WIDTH) {
+      ground[y + 1][x] = T.PAVED_PATH
+    }
+  }
+}
+
+// Helper to draw a vertical paved road
+function drawVerticalRoad(ground: typeof T[keyof typeof T][][], x: number, startY: number, endY: number): void {
+  for (let y = startY; y <= endY; y++) {
+    if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH) {
+      ground[y][x] = T.PAVED_PATH
+    }
+    if (y >= 0 && y < HEIGHT && x + 1 >= 0 && x + 1 < WIDTH) {
+      ground[y][x + 1] = T.PAVED_PATH
+    }
+  }
+}
+
+// Create ground layer - accurate street grid
 function createGroundLayer(): typeof T[keyof typeof T][][] {
   const ground: typeof T[keyof typeof T][][] = []
   
@@ -26,114 +50,45 @@ function createGroundLayer(): typeof T[keyof typeof T][][] {
     ground.push(fillRow(T.GRASS))
   }
   
-  // Add deterministic flower patches near heart positions and special areas
+  // Flower decorations
   const flowerPositions = [
-    // Near hearts for visual hints
-    { x: 2, y: 4 }, { x: 4, y: 4 }, { x: 3, y: 5 },
-    { x: 12, y: 6 }, { x: 14, y: 6 }, { x: 13, y: 7 },
-    { x: 2, y: 12 }, { x: 4, y: 12 }, { x: 3, y: 13 },
-    { x: 24, y: 12 }, { x: 26, y: 12 }, { x: 25, y: 13 },
-    { x: 2, y: 18 }, { x: 4, y: 18 },
-    { x: 24, y: 18 }, { x: 26, y: 18 },
-    { x: 26, y: 22 }, { x: 28, y: 22 },
-    { x: 10, y: 24 }, { x: 12, y: 24 },
-    { x: 4, y: 27 }, { x: 6, y: 27 }, { x: 5, y: 26 },
-    { x: 29, y: 10 }, { x: 31, y: 10 },
-    // Scattered decoration
-    { x: 8, y: 15 }, { x: 15, y: 20 }, { x: 32, y: 25 },
-    { x: 7, y: 3 }, { x: 35, y: 6 }, { x: 10, y: 10 },
+    { x: 5, y: 10 }, { x: 8, y: 15 }, { x: 12, y: 8 },
+    { x: 18, y: 12 }, { x: 25, y: 10 }, { x: 30, y: 15 },
+    { x: 15, y: 22 }, { x: 22, y: 25 }, { x: 35, y: 20 },
   ]
-  
   for (const pos of flowerPositions) {
     if (pos.y >= 0 && pos.y < HEIGHT && pos.x >= 0 && pos.x < WIDTH) {
       ground[pos.y][pos.x] = T.GRASS_FLOWERS
     }
   }
   
-  // Main paved path from spawn to house (central corridor)
-  const mainPath = [
-    // Vertical central path
-    ...Array.from({ length: 24 }, (_, i) => ({ x: 19, y: 28 - i })),
-    { x: 20, y: 28 }, { x: 20, y: 27 }, { x: 20, y: 26 },
-    { x: 18, y: 28 }, { x: 18, y: 27 }, { x: 18, y: 26 },
-  ]
+  // ===== HORIZONTAL ROADS (parallel) =====
   
-  for (const point of mainPath) {
-    if (point.y >= 5 && point.y < HEIGHT && point.x >= 0 && point.x < WIDTH) {
-      ground[point.y][point.x] = T.PAVED_PATH
-    }
-  }
+  // FLATBUSH DR - top horizontal road (y=6-7)
+  // Finial Dr becomes Flatbush from the right (spawn entrance)
+  drawHorizontalRoad(ground, 6, 4, 43)
   
-  // Paved area in front of house
-  for (let y = 3; y <= 5; y++) {
-    for (let x = 17; x <= 21; x++) {
-      ground[y][x] = T.PAVED_PATH
-    }
-  }
+  // THE RAVINE WY - middle horizontal road (y=16-17)
+  // Extended to reach Prospect Park area on the left
+  drawHorizontalRoad(ground, 16, 1, 36)
   
-  // West branch paths (to hearts at (3,4), (3,12), (3,18), (5,28))
-  const westPaths = [
-    // Branch from main path west at y=6
-    ...Array.from({ length: 16 }, (_, i) => ({ x: 18 - i, y: 6 })),
-    // South from x=3
-    ...Array.from({ length: 15 }, (_, i) => ({ x: 3, y: 6 + i })),
-    ...Array.from({ length: 15 }, (_, i) => ({ x: 4, y: 6 + i })),
-    // Connect to (5,28)
-    ...Array.from({ length: 8 }, (_, i) => ({ x: 5, y: 21 + i })),
-    // North branch to (3,4)
-    { x: 3, y: 5 }, { x: 3, y: 4 }, { x: 4, y: 5 }, { x: 4, y: 4 },
-  ]
+  // BOATHOUSE DR - bottom horizontal road (y=26-27)
+  drawHorizontalRoad(ground, 26, 4, 36)
   
-  for (const point of westPaths) {
-    if (point.y >= 0 && point.y < HEIGHT && point.x >= 0 && point.x < WIDTH) {
-      ground[point.y][point.x] = T.DIRT_PATH
-    }
-  }
+  // ===== VERTICAL ROADS (parallel) =====
   
-  // East branch paths (to hearts at (25,12), (25,18), (27,22), (30,10))
-  const eastPaths = [
-    // Branch from main path east at y=10
-    ...Array.from({ length: 12 }, (_, i) => ({ x: 20 + i, y: 10 })),
-    // South from x=25
-    ...Array.from({ length: 14 }, (_, i) => ({ x: 25, y: 10 + i })),
-    ...Array.from({ length: 14 }, (_, i) => ({ x: 26, y: 10 + i })),
-    // Branch to (27,22)
-    ...Array.from({ length: 4 }, (_, i) => ({ x: 26 + i, y: 22 })),
-    // Branch to (30,10)
-    { x: 27, y: 10 }, { x: 28, y: 10 }, { x: 29, y: 10 }, { x: 30, y: 10 }, { x: 31, y: 10 },
-    // Branch from main path at y=6 to (13,6)
-    ...Array.from({ length: 6 }, (_, i) => ({ x: 13 + i, y: 6 })),
-  ]
+  // PERISTYLE DR - left vertical road (x=8-9)
+  drawVerticalRoad(ground, 8, 6, 30)
   
-  for (const point of eastPaths) {
-    if (point.y >= 0 && point.y < HEIGHT && point.x >= 0 && point.x < WIDTH) {
-      ground[point.y][point.x] = T.DIRT_PATH
-    }
-  }
+  // AMBERGILL CT - center vertical road (x=22-23)
+  drawVerticalRoad(ground, 22, 6, 30)
   
-  // South branch to (11,24)
-  const southBranch = [
-    ...Array.from({ length: 8 }, (_, i) => ({ x: 19 - i, y: 24 })),
-    { x: 11, y: 24 }, { x: 12, y: 24 },
-  ]
+  // TURACO TRL - right vertical road (x=34-35)
+  drawVerticalRoad(ground, 34, 6, 30)
   
-  for (const point of southBranch) {
-    if (point.y >= 0 && point.y < HEIGHT && point.x >= 0 && point.x < WIDTH) {
-      ground[point.y][point.x] = T.DIRT_PATH
-    }
-  }
-  
-  // Water features (careful not to block paths)
-  // West pond (moved to avoid path)
-  for (let x = 6; x <= 8; x++) {
-    for (let y = 14; y <= 16; y++) {
-      ground[y][x] = T.WATER
-    }
-  }
-  
-  // East pond
-  for (let x = 33; x <= 36; x++) {
-    for (let y = 18; y <= 20; y++) {
+  // ===== LAKE below spawn point (right side) =====
+  for (let y = 10; y <= 18; y++) {
+    for (let x = 38; x <= 42; x++) {
       ground[y][x] = T.WATER
     }
   }
@@ -149,69 +104,77 @@ function createObjectsLayer(): (typeof T[keyof typeof T] | null)[][] {
     objects.push(emptyObjectRow())
   }
   
-  // Add border trees (leave spawn area open)
+  // Add border trees (leave spawn area on right side open for Finial Dr)
   for (let x = 0; x < WIDTH; x++) {
-    if (x < 17 || x > 21) { // Leave spawn area open
-      objects[0][x] = T.TREE
-      objects[HEIGHT - 1][x] = T.TREE
-    }
+    objects[0][x] = T.TREE
+    objects[HEIGHT - 1][x] = T.TREE
   }
   for (let y = 1; y < HEIGHT - 1; y++) {
     objects[y][0] = T.TREE
-    objects[y][WIDTH - 1] = T.TREE
+    if (y < 5 || y > 9) { // Leave spawn entrance open at Finial Dr level
+      objects[y][WIDTH - 1] = T.TREE
+    }
   }
   
-  // Add scattered trees (avoiding paths and heart positions)
+  // ===== SCATTERED TREES (avoiding roads and lake) =====
   const treePositions = [
-    // Northern area near house
-    { x: 5, y: 2 }, { x: 8, y: 3 }, { x: 10, y: 2 }, { x: 12, y: 3 },
-    { x: 26, y: 2 }, { x: 28, y: 3 }, { x: 32, y: 2 }, { x: 35, y: 3 },
-    // Western side
-    { x: 2, y: 8 }, { x: 8, y: 10 }, { x: 10, y: 8 },
-    { x: 2, y: 22 }, { x: 8, y: 24 },
-    // Eastern side  
-    { x: 32, y: 6 }, { x: 35, y: 8 }, { x: 37, y: 12 },
-    { x: 32, y: 24 }, { x: 35, y: 26 },
-    // Central scattered
-    { x: 15, y: 12 }, { x: 15, y: 18 },
-    { x: 23, y: 14 }, { x: 23, y: 20 },
+    // Top left area
+    { x: 2, y: 3 }, { x: 5, y: 2 }, { x: 3, y: 10 }, { x: 5, y: 12 },
+    // Between Peristyle and Ambergill
+    { x: 12, y: 10 }, { x: 15, y: 12 }, { x: 18, y: 10 }, { x: 13, y: 22 },
+    // Between Ambergill and Turaco
+    { x: 26, y: 10 }, { x: 29, y: 12 }, { x: 27, y: 22 }, { x: 30, y: 24 },
+    // Right side (moved outside lake area - lake is x=38-42, y=10-18)
+    { x: 37, y: 20 }, { x: 40, y: 20 }, { x: 38, y: 22 }, { x: 41, y: 25 },
+    // Bottom area
+    { x: 4, y: 30 }, { x: 12, y: 30 }, { x: 28, y: 30 },
   ]
-  
   for (const pos of treePositions) {
-    objects[pos.y][pos.x] ??= T.TREE
+    if (pos.y > 0 && pos.y < HEIGHT - 1 && pos.x > 0 && pos.x < WIDTH - 1) {
+      objects[pos.y][pos.x] = T.TREE
+    }
   }
   
-  // Add bushes
+  // ===== BUSHES (decorative) =====
   const bushPositions = [
-    { x: 7, y: 7 }, { x: 9, y: 4 }, { x: 4, y: 18 }, { x: 6, y: 24 },
-    { x: 32, y: 6 }, { x: 34, y: 10 }, { x: 36, y: 20 }, { x: 31, y: 26 },
-    { x: 15, y: 10 }, { x: 23, y: 5 }, { x: 26, y: 18 }, { x: 11, y: 26 },
+    { x: 6, y: 4 }, { x: 14, y: 4 }, { x: 28, y: 4 },
+    { x: 6, y: 14 }, { x: 14, y: 20 }, { x: 30, y: 14 },
+    { x: 6, y: 24 }, { x: 19, y: 24 }, { x: 30, y: 20 },
   ]
-  
   for (const pos of bushPositions) {
-    objects[pos.y][pos.x] ??= T.BUSH
+    if (objects[pos.y]?.[pos.x] === null) {
+      objects[pos.y][pos.x] = T.BUSH
+    }
   }
   
-  // Place house (3x3 at position 18,2 - so tiles 18-20, 2-4)
-  // Mark house position - only mark the anchor point, rendering handles the rest
-  objects[2][18] = T.HOUSE
+  // ===== HOUSE on The Ravine Wy, near Ambergill Ct (pink X location) =====
+  // House anchor at x=18, y=18 (3x3 house will occupy 18-20, 18-20)
+  objects[18][18] = T.HOUSE
   
   return objects
 }
 
-// Create overhead layer - tree tops that render above player
+// Create overhead layer
 function createOverheadLayer(): (typeof T[keyof typeof T] | null)[][] {
   const overhead: (typeof T[keyof typeof T] | null)[][] = []
-  
   for (let y = 0; y < HEIGHT; y++) {
     overhead.push(emptyObjectRow())
   }
-  
-  // Tree tops would go here if we had separate top sprites
-  // For now, we'll handle tree rendering in a single layer
-  
   return overhead
 }
+
+// Street labels
+const STREET_LABELS: StreetLabel[] = [
+  // Horizontal roads
+  { name: 'Flatbush Dr', x: 15, y: 5, rotation: 0 },
+  { name: 'Finial Dr', x: 38, y: 5, rotation: 0 },
+  { name: 'The Ravine Wy', x: 13, y: 15, rotation: 0 },
+  { name: 'Boathouse Dr', x: 15, y: 25, rotation: 0 },
+  // Vertical roads
+  { name: 'Peristyle Dr', x: 7, y: 11, rotation: 90 },
+  { name: 'Ambergill Ct', x: 21, y: 11, rotation: 90 },
+  { name: 'Turaco Trl', x: 33, y: 11, rotation: 90 },
+]
 
 export const MAP_DATA: MapData = {
   width: WIDTH,
@@ -221,20 +184,23 @@ export const MAP_DATA: MapData = {
     objects: createObjectsLayer(),
     overhead: createOverheadLayer(),
   },
-  playerSpawn: { x: 19, y: 28 },
-  housePosition: { x: 18, y: 2 },
+  // Spawn at Finial Dr (right side, entering as Flatbush Dr)
+  playerSpawn: { x: 42, y: 7 },
+  // House on The Ravine Wy, near Ambergill Ct (pink X location)
+  housePosition: { x: 18, y: 18 },
   heartPositions: [
-    { x: 3, y: 4, photoIndex: 0 },    // West branch - hidden near starting area
-    { x: 13, y: 6, photoIndex: 1 },   // Central path - early path discovery  
-    { x: 3, y: 12, photoIndex: 2 },   // Southwest loop - small flowers clearing
-    { x: 25, y: 12, photoIndex: 3 },  // East branch - past the first fork
-    { x: 3, y: 18, photoIndex: 4 },   // West pond area - near water feature
-    { x: 25, y: 18, photoIndex: 5 },  // East clearing - open area
-    { x: 27, y: 22, photoIndex: 6 },  // Far east - requires exploration
-    { x: 11, y: 24, photoIndex: 7 },  // Southern path - side branch
-    { x: 5, y: 26, photoIndex: 8 },   // Southwest corner - off main path
-    { x: 30, y: 10, photoIndex: 9 },  // Far east glade - hidden area
+    { x: 10, y: 7, photoIndex: 0 },   // Flatbush Dr near Peristyle
+    { x: 28, y: 7, photoIndex: 1 },   // Flatbush Dr near Ambersill
+    { x: 9, y: 12, photoIndex: 2 },   // Peristyle Dr upper
+    { x: 35, y: 12, photoIndex: 3 },  // Turaco Trl upper
+    { x: 12, y: 17, photoIndex: 4 },  // Ravine Wy west
+    { x: 30, y: 17, photoIndex: 5 },  // Ravine Wy east
+    { x: 9, y: 22, photoIndex: 6 },   // Peristyle Dr lower
+    { x: 23, y: 22, photoIndex: 7 },  // Ambersill Ct lower
+    { x: 15, y: 27, photoIndex: 8 },  // Boathouse Dr west
+    { x: 30, y: 27, photoIndex: 9 },  // Boathouse Dr east
   ],
+  streetLabels: STREET_LABELS,
 }
 
 export const TILE_SIZE = 32

@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Character } from '../../types/game';
-import { ASSETS } from '../../utils/assets';
-import { useAudio } from '../../hooks/useAudio';
 import { FloatingHearts } from './FloatingHearts';
 import { CharacterCard } from './CharacterCard';
 import { MusicToggle } from './MusicToggle';
@@ -9,6 +7,8 @@ import styles from './PlayerSelect.module.css';
 
 interface PlayerSelectScreenProps {
   onSelect: (character: Character) => void;
+  isMusicPlaying: boolean;
+  onToggleMusic: () => void;
 }
 
 const CHARACTERS: Character[] = ['dudu', 'chungu'];
@@ -17,11 +17,9 @@ const KEY_HINTS: Record<Character, string> = {
   chungu: 'Press B',
 };
 
-export function PlayerSelectScreen({ onSelect }: Readonly<PlayerSelectScreenProps>) {
+export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: Readonly<PlayerSelectScreenProps>) {
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
-  
-  const { isPlaying, toggle: toggleMusic } = useAudio(ASSETS.audio.bgm);
 
   const handleSelect = useCallback((character: Character) => {
     if (selectedCharacter) return; // Already selected
@@ -68,7 +66,7 @@ export function PlayerSelectScreen({ onSelect }: Readonly<PlayerSelectScreenProp
     <div className={containerClasses}>
       <FloatingHearts count={25} />
       
-      <MusicToggle isPlaying={isPlaying} onToggle={toggleMusic} />
+      <MusicToggle isPlaying={isMusicPlaying} onToggle={onToggleMusic} />
       
       <h1 className={styles.title}>Choose Your Character</h1>
       

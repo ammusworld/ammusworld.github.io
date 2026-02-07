@@ -40,10 +40,18 @@ export const ASSETS = {
     sparkle: sparkleIcon,
   },
   photos: Array.from({ length: 10 }, (_, i) => 
-    `/photos/photo-${String(i + 1).padStart(2, '0')}.svg`
+    `${import.meta.env.BASE_URL}photos/photo-${String(i + 1).padStart(2, '0')}.svg`
   ),
   audio: {
-    bgm: '/music/bgm.mp3',
+    bgm: `${import.meta.env.BASE_URL}music/game-music.mp3`,
+    finale: `${import.meta.env.BASE_URL}music/finale1.mp3`,
+    heartCollected: `${import.meta.env.BASE_URL}music/heart-collected.mp3`,
+  },
+  cutscene: {
+    bubuRun: `${import.meta.env.BASE_URL}gifs/bubu-run.gif`,
+    bubuHug: `${import.meta.env.BASE_URL}gifs/bubu-hug.gif`,
+    bubuSpin: `${import.meta.env.BASE_URL}gifs/bubu-spin.gif`,
+    houseInside: `${import.meta.env.BASE_URL}photos/house-inside.jpg`,
   },
 } as const
 

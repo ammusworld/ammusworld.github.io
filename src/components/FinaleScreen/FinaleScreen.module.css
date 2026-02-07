@@ -115,7 +115,7 @@
 
 .name {
   font-size: 64px;
-  color: var(--red-heart);
+  color: #ff6b6b;
   text-shadow:
     0 0 10px var(--red-heart),
     0 0 30px var(--pink-medium),
@@ -170,6 +170,25 @@
   font-size: 32px !important;
   color: var(--red-heart) !important;
   animation: pulse 1.5s ease-in-out infinite;
+}
+
+.signoff {
+  margin-top: 24px;
+  font-size: 20px;
+  color: var(--pink-light);
+  font-style: italic;
+}
+
+.footer {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 18px;
+  color: var(--pink-light);
+  font-style: italic;
+  animation: fadeIn 1s ease;
 }
 
 /* Decorative floating hearts around text */

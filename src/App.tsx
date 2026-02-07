@@ -4,8 +4,11 @@ import { PlayerSelectScreen } from './components/PlayerSelect'
 import { InstructionsScreen } from './components/InstructionsScreen'
 import { GameMap } from './components/GameMap'
 import { PhotoModal } from './components/PhotoModal'
+import { CutsceneScreen } from './components/CutsceneScreen'
 import { FinaleScreen } from './components/FinaleScreen'
 import { MAP_DATA } from './data/mapData'
+import { useAudio } from './hooks/useAudio'
+import { ASSETS } from './utils/assets'
 import './App.css'
 
 function App() {
@@ -13,6 +16,10 @@ function App() {
   const [character, setCharacter] = useState<Character | null>(null)
   const [collectedHearts, setCollectedHearts] = useState<Set<number>>(new Set())
   const [showingPhotoIndex, setShowingPhotoIndex] = useState<number | null>(null)
+  const [currentMusic, setCurrentMusic] = useState(ASSETS.audio.bgm)
+  
+  // Global audio state - persists across all screens
+  const { isPlaying: isMusicPlaying, toggle: toggleMusic } = useAudio(currentMusic)
 
   const handleCharacterSelect = (char: Character) => {
     setCharacter(char)
@@ -35,6 +42,11 @@ function App() {
   }, [])
 
   const handleHouseReached = useCallback(() => {
+    setCurrentMusic(ASSETS.audio.finale)
+    setScreen('cutscene')
+  }, [])
+
+  const handleCutsceneComplete = useCallback(() => {
     setScreen('finale')
   }, [])
 
@@ -43,12 +55,17 @@ function App() {
     setCharacter(null)
     setCollectedHearts(new Set())
     setShowingPhotoIndex(null)
+    setCurrentMusic(ASSETS.audio.bgm)
   }, [])
 
   return (
     <>
       {screen === 'select' && (
-        <PlayerSelectScreen onSelect={handleCharacterSelect} />
+        <PlayerSelectScreen 
+          onSelect={handleCharacterSelect}
+          isMusicPlaying={isMusicPlaying}
+          onToggleMusic={toggleMusic}
+        />
       )}
       {screen === 'instructions' && (
         <InstructionsScreen onContinue={handleInstructionsContinue} />
@@ -61,6 +78,8 @@ function App() {
             onHeartCollected={handleHeartCollected}
             collectedHearts={collectedHearts}
             isPaused={showingPhotoIndex !== null}
+            isMusicPlaying={isMusicPlaying}
+            onToggleMusic={toggleMusic}
           />
           <PhotoModal
             photoIndex={showingPhotoIndex ?? 0}
@@ -70,6 +89,9 @@ function App() {
             collectedCount={collectedHearts.size}
           />
         </>
+      )}
+      {screen === 'cutscene' && (
+        <CutsceneScreen onComplete={handleCutsceneComplete} />
       )}
       {screen === 'finale' && character && (
         <FinaleScreen 

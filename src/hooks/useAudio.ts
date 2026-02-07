@@ -1,21 +1,60 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-export function useAudio(src: string) {
-  const [isPlaying, setIsPlaying] = useState(false);
+export function useAudio(src: string, autoPlay = true) {
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userHasInteractedRef = useRef(false);
 
   useEffect(() => {
-    audioRef.current = new Audio(src);
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.5;
+    const audio = new Audio(src);
+    audio.loop = true;
+    audio.volume = 0.5;
+    audioRef.current = audio;
+    
+    const tryPlay = () => {
+      if (!audioRef.current) return;
+      
+      audioRef.current.play()
+        .then(() => {
+          userHasInteractedRef.current = true;
+          setIsPlaying(true);
+          // Remove all listeners once user has interacted
+          document.removeEventListener('click', tryPlay);
+          document.removeEventListener('keydown', tryPlay);
+          document.removeEventListener('touchstart', tryPlay);
+        })
+        .catch(() => {
+          // Autoplay blocked - listeners will retry on interaction
+        });
+    };
+
+    // Attempt autoplay if requested
+    if (autoPlay) {
+      // If user already interacted previously, play immediately
+      if (userHasInteractedRef.current) {
+        audio.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      } else {
+        tryPlay();
+        
+        // Set up interaction listeners as fallback for autoplay restrictions
+        document.addEventListener('click', tryPlay);
+        document.addEventListener('keydown', tryPlay);
+        document.addEventListener('touchstart', tryPlay);
+      }
+    }
     
     return () => {
+      document.removeEventListener('click', tryPlay);
+      document.removeEventListener('keydown', tryPlay);
+      document.removeEventListener('touchstart', tryPlay);
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
     };
-  }, [src]);
+  }, [src, autoPlay]);
 
   const toggle = useCallback(() => {
     if (!audioRef.current) return;

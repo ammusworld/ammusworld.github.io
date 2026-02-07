@@ -4,7 +4,7 @@ export type Character = 'dudu' | 'chungu'
 
 export type Direction = 'up' | 'down' | 'left' | 'right'
 
-export type GameScreen = 'select' | 'instructions' | 'game' | 'finale'
+export type GameScreen = 'select' | 'instructions' | 'game' | 'cutscene' | 'finale'
 
 export interface Position {
   x: number
@@ -68,6 +68,13 @@ export interface HeartPosition {
   photoIndex: number
 }
 
+export interface StreetLabel {
+  name: string
+  x: number
+  y: number
+  rotation?: number // degrees, 0 = horizontal, 90 = vertical
+}
+
 export interface MapData {
   width: number
   height: number
@@ -79,4 +86,5 @@ export interface MapData {
   playerSpawn: Position
   housePosition: Position
   heartPositions: HeartPosition[]
+  streetLabels: StreetLabel[]
 }

@@ -1,5 +1,5 @@
 import { useCallback, memo, useState, useEffect, useRef } from 'react'
-import type { Character as CharacterType, HeartPosition } from '../../types/game'
+import type { Character as CharacterType, HeartPosition, StreetLabel } from '../../types/game'
 import { ASSETS } from '../../utils/assets'
 import { MAP_DATA, TILE_SIZE, VIEWPORT_WIDTH, VIEWPORT_HEIGHT } from '../../data/mapData'
 import { useCamera, useVisibleTiles } from '../../hooks/useCamera'
@@ -16,6 +16,8 @@ interface GameMapProps {
   onHeartCollected: (photoIndex: number) => void
   collectedHearts: Set<number>
   isPaused?: boolean
+  isMusicPlaying: boolean
+  onToggleMusic: () => void
 }
 
 interface CollectibleHeartsProps {
@@ -59,6 +61,34 @@ const CollectibleHearts = memo(function CollectibleHearts({
   )
 })
 
+interface StreetLabelsProps {
+  labels: StreetLabel[]
+  tileSize: number
+}
+
+const StreetLabels = memo(function StreetLabels({
+  labels,
+  tileSize,
+}: Readonly<StreetLabelsProps>) {
+  return (
+    <div className={styles.streetLabelsLayer}>
+      {labels.map((label, index) => (
+        <div
+          key={`${label.name}-${index}`}
+          className={styles.streetLabel}
+          style={{
+            left: label.x * tileSize,
+            top: label.y * tileSize,
+            transform: label.rotation ? `rotate(${label.rotation}deg)` : undefined,
+          }}
+        >
+          {label.name}
+        </div>
+      ))}
+    </div>
+  )
+})
+
 interface HeartCounterProps {
   collected: number
   total: number
@@ -84,6 +114,8 @@ export function GameMap({
   onHeartCollected,
   collectedHearts,
   isPaused = false,
+  isMusicPlaying,
+  onToggleMusic,
 }: Readonly<GameMapProps>) {
   const [showHousePrompt, setShowHousePrompt] = useState(false)
   const [showLockedBubble, setShowLockedBubble] = useState(false)
@@ -99,6 +131,9 @@ export function GameMap({
     // Check for heart collision
     const heartIndex = checkHeartCollision(newPos, MAP_DATA.heartPositions, collectedHearts)
     if (heartIndex !== null) {
+      // Play heart collected sound effect
+      const sfx = new Audio(ASSETS.audio.heartCollected)
+      sfx.play().catch(() => {})
       onHeartCollected(heartIndex)
     }
     
@@ -133,8 +168,10 @@ export function GameMap({
   
   const visibleArea = useVisibleTiles(camera, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, TILE_SIZE)
   
-  // House door interaction zone (one tile south of door at 19,4)
-  const isAtHouseDoor = gridPos.x === 19 && gridPos.y === 5
+  // House door interaction zone (one tile south of house door)
+  const houseDoorX = MAP_DATA.housePosition.x + 1 // center of 3-wide house
+  const houseDoorY = MAP_DATA.housePosition.y + 3 // one tile below house
+  const isAtHouseDoor = gridPos.x === houseDoorX && gridPos.y === houseDoorY
   const allHeartsCollected = collectedHearts.size >= MAP_DATA.heartPositions.length
   
   // Show/hide house prompt when at door
@@ -214,6 +251,12 @@ export function GameMap({
             zIndex={10}
           />
           
+          {/* Street labels */}
+          <StreetLabels
+            labels={MAP_DATA.streetLabels}
+            tileSize={TILE_SIZE}
+          />
+          
           {/* Collectible hearts */}
           <CollectibleHearts
             heartPositions={MAP_DATA.heartPositions}
@@ -258,12 +301,12 @@ export function GameMap({
             </div>
           )}
           
-          {/* Address sign */}
+          {/* Address sign - positioned on grass to the left of house */}
           <div 
             className={styles.addressSign}
             style={{
-              left: (MAP_DATA.housePosition.x + 3) * TILE_SIZE,
-              top: (MAP_DATA.housePosition.y + 2) * TILE_SIZE,
+              left: (MAP_DATA.housePosition.x - 3) * TILE_SIZE,
+              top: (MAP_DATA.housePosition.y + 1) * TILE_SIZE,
             }}
           >
             <div className={styles.signBoard}>9217 Ravine Wy</div>
@@ -282,6 +325,13 @@ export function GameMap({
         {/* UI Overlay */}
         <div className={styles.uiOverlay}>
           <HeartCounter collected={collectedHearts.size} total={MAP_DATA.heartPositions.length} />
+          <button 
+            className={styles.musicToggle}
+            onClick={onToggleMusic}
+            aria-label={isMusicPlaying ? 'Mute music' : 'Unmute music'}
+          >
+            {isMusicPlaying ? '🔊' : '🔇'}
+          </button>
         </div>
       </div>
       

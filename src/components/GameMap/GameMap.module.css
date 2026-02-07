@@ -64,6 +64,30 @@
   z-index: 40;
 }
 
+/* Street labels layer */
+.streetLabelsLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.streetLabel {
+  position: absolute;
+  font-family: 'Arial', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(80, 80, 80, 0.7);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1px 4px;
+  border-radius: 2px;
+  white-space: nowrap;
+  text-shadow: none;
+  box-shadow: none;
+  transform-origin: left center;
+}
+
 .collectibleHeart {
   position: absolute;
   animation: heartBob 1s ease-in-out infinite;
@@ -125,6 +149,25 @@
 .heartCountText {
   font-size: 16px;
   color: var(--white);
+}
+
+.musicToggle {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--pink-medium);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.musicToggle:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.1);
 }
 
 .instructions {

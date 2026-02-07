@@ -1,142 +1,195 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Chungu (Pixel Girl) Sprite Sheet - 4x4 grid of 32x32 sprites -->
+  <!-- Chungu (Cute Girl) Sprite Sheet - 4x4 grid of 32x32 sprites -->
   <!-- Row 0: Down (facing camera) -->
   <g id="down">
     <!-- Frame 1 - Standing -->
     <g transform="translate(0,0)">
-      <!-- Hair -->
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
+      <!-- Hair back -->
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
       <!-- Face -->
-      <ellipse cx="16" cy="10" rx="7" ry="6" fill="#FFE4C4"/>
+      <ellipse cx="16" cy="11" rx="7" ry="6" fill="#FFE4C4"/>
+      <!-- Hair front - short bob style -->
+      <path d="M7 8 Q10 4 16 3 Q22 4 25 8 L24 10 Q20 8 16 8 Q12 8 8 10 Z" fill="#4A3728"/>
+      <!-- Side hair -->
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
+      <!-- Eyebrows -->
+      <path d="M12 8 L14 7.5" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <path d="M18 7.5 L20 8" stroke="#4A3728" stroke-width="0.5" fill="none"/>
       <!-- Eyes -->
-      <circle cx="13" cy="9" r="1.5" fill="#000"/>
-      <circle cx="19" cy="9" r="1.5" fill="#000"/>
+      <ellipse cx="13" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <ellipse cx="19" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <!-- Eye shine -->
+      <circle cx="13.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <circle cx="19.5" cy="9.5" r="0.5" fill="#FFF"/>
       <!-- Blush -->
-      <ellipse cx="11" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <ellipse cx="21" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <!-- Hair bangs -->
-      <path d="M8 6 Q16 4 24 6 L22 8 Q16 7 10 8 Z" fill="#2C1810"/>
+      <ellipse cx="10" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="22" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <!-- Smile -->
+      <path d="M14 13 Q16 14.5 18 13" stroke="#000" stroke-width="0.5" fill="none"/>
       <!-- Dress -->
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
+      <!-- Dress detail -->
+      <path d="M14 16 L16 20 L18 16" stroke="#FF1493" stroke-width="0.5" fill="none"/>
       <!-- Legs -->
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <!-- Frame 2 -->
     <g transform="translate(32,0)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
-      <ellipse cx="16" cy="10" rx="7" ry="6" fill="#FFE4C4"/>
-      <circle cx="13" cy="9" r="1.5" fill="#000"/>
-      <circle cx="19" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="11" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <ellipse cx="21" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <path d="M8 6 Q16 4 24 6 L22 8 Q16 7 10 8 Z" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <ellipse cx="16" cy="11" rx="7" ry="6" fill="#FFE4C4"/>
+      <path d="M7 8 Q10 4 16 3 Q22 4 25 8 L24 10 Q20 8 16 8 Q12 8 8 10 Z" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
+      <path d="M12 8 L14 7.5" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <path d="M18 7.5 L20 8" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <ellipse cx="13" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <ellipse cx="19" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <circle cx="13.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <circle cx="19.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <ellipse cx="10" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="22" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <path d="M14 13 Q16 14.5 18 13" stroke="#000" stroke-width="0.5" fill="none"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
+      <path d="M14 16 L16 20 L18 16" stroke="#FF1493" stroke-width="0.5" fill="none"/>
       <rect x="9" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <!-- Frame 3 -->
     <g transform="translate(64,0)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
-      <ellipse cx="16" cy="10" rx="7" ry="6" fill="#FFE4C4"/>
-      <circle cx="13" cy="9" r="1.5" fill="#000"/>
-      <circle cx="19" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="11" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <ellipse cx="21" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <path d="M8 6 Q16 4 24 6 L22 8 Q16 7 10 8 Z" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <ellipse cx="16" cy="11" rx="7" ry="6" fill="#FFE4C4"/>
+      <path d="M7 8 Q10 4 16 3 Q22 4 25 8 L24 10 Q20 8 16 8 Q12 8 8 10 Z" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
+      <path d="M12 8 L14 7.5" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <path d="M18 7.5 L20 8" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <ellipse cx="13" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <ellipse cx="19" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <circle cx="13.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <circle cx="19.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <ellipse cx="10" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="22" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <path d="M14 13 Q16 14.5 18 13" stroke="#000" stroke-width="0.5" fill="none"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
+      <path d="M14 16 L16 20 L18 16" stroke="#FF1493" stroke-width="0.5" fill="none"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <!-- Frame 4 -->
     <g transform="translate(96,0)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
-      <ellipse cx="16" cy="10" rx="7" ry="6" fill="#FFE4C4"/>
-      <circle cx="13" cy="9" r="1.5" fill="#000"/>
-      <circle cx="19" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="11" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <ellipse cx="21" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
-      <path d="M8 6 Q16 4 24 6 L22 8 Q16 7 10 8 Z" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <ellipse cx="16" cy="11" rx="7" ry="6" fill="#FFE4C4"/>
+      <path d="M7 8 Q10 4 16 3 Q22 4 25 8 L24 10 Q20 8 16 8 Q12 8 8 10 Z" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
+      <path d="M12 8 L14 7.5" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <path d="M18 7.5 L20 8" stroke="#4A3728" stroke-width="0.5" fill="none"/>
+      <ellipse cx="13" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <ellipse cx="19" cy="10" rx="1.5" ry="2" fill="#000"/>
+      <circle cx="13.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <circle cx="19.5" cy="9.5" r="0.5" fill="#FFF"/>
+      <ellipse cx="10" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="22" cy="12" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <path d="M14 13 Q16 14.5 18 13" stroke="#000" stroke-width="0.5" fill="none"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
+      <path d="M14 16 L16 20 L18 16" stroke="#FF1493" stroke-width="0.5" fill="none"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="20" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
   </g>
   
-  <!-- Row 1: Left -->
+  <!-- Row 1: Left (facing left, hair extends to the right) -->
   <g id="left">
     <g transform="translate(0,32)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="14" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="12" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="10" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <!-- Rounded hair behind head -->
+      <ellipse cx="17" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <!-- Face -->
+      <ellipse cx="12" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <!-- Eye -->
+      <ellipse cx="10" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="10.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <!-- Smile -->
+      <path d="M8 13 Q9 14 10 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M10 16 L20 16 L22 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="16" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(32,32)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="14" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="12" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="10" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="17" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="12" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="10" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="10.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M8 13 Q9 14 10 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M10 16 L20 16 L22 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="9" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="16" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(64,32)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="14" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="12" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="10" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="17" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="12" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="10" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="10.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M8 13 Q9 14 10 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M10 16 L20 16 L22 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="16" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(96,32)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="14" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="12" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="10" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="17" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="12" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="10" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="10.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M8 13 Q9 14 10 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M10 16 L20 16 L22 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="13" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
   </g>
   
-  <!-- Row 2: Right -->
+  <!-- Row 2: Right (facing right, hair extends to the left) -->
   <g id="right">
     <g transform="translate(0,64)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="18" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="20" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="22" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <!-- Rounded hair behind head -->
+      <ellipse cx="15" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <!-- Face -->
+      <ellipse cx="20" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <!-- Eye -->
+      <ellipse cx="22" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="22.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <!-- Smile -->
+      <path d="M22 13 Q23 14 24 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M12 16 L22 16 L24 28 L10 28 Z" fill="#FF69B4"/>
       <rect x="13" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(32,64)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="18" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="20" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="22" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="15" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="20" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="22" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="22.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M22 13 Q23 14 24 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M12 16 L22 16 L24 28 L10 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(64,64)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="18" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="20" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="22" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="15" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="20" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="22" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="22.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M22 13 Q23 14 24 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M12 16 L22 16 L24 28 L10 28 Z" fill="#FF69B4"/>
       <rect x="13" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(96,64)">
-      <ellipse cx="16" cy="8" rx="9" ry="8" fill="#2C1810"/>
-      <ellipse cx="18" cy="10" rx="6" ry="6" fill="#FFE4C4"/>
-      <circle cx="20" cy="9" r="1.5" fill="#000"/>
-      <ellipse cx="22" cy="11" rx="1.5" ry="0.8" fill="#FFB6C1"/>
+      <ellipse cx="15" cy="10" rx="7" ry="7" fill="#4A3728"/>
+      <ellipse cx="20" cy="11" rx="5" ry="5.5" fill="#FFE4C4"/>
+      <ellipse cx="22" cy="10" rx="1.2" ry="1.8" fill="#000"/>
+      <circle cx="22.4" cy="9.5" r="0.4" fill="#FFF"/>
+      <path d="M22 13 Q23 14 24 13" stroke="#000" stroke-width="0.4" fill="none"/>
       <path d="M12 16 L22 16 L24 28 L10 28 Z" fill="#FF69B4"/>
       <rect x="13" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="20" y="26" width="3" height="4" fill="#FFE4C4"/>
@@ -146,25 +199,33 @@
   <!-- Row 3: Up (back view) -->
   <g id="up">
     <g transform="translate(0,96)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(32,96)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="9" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(64,96)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="18" y="26" width="3" height="4" fill="#FFE4C4"/>
     </g>
     <g transform="translate(96,96)">
-      <ellipse cx="16" cy="8" rx="10" ry="8" fill="#2C1810"/>
+      <ellipse cx="16" cy="9" rx="9" ry="7" fill="#4A3728"/>
+      <path d="M7 8 L8 14 Q9 15 10 14 L9 9 Z" fill="#4A3728"/>
+      <path d="M25 8 L24 14 Q23 15 22 14 L23 9 Z" fill="#4A3728"/>
       <path d="M10 16 L22 16 L24 28 L8 28 Z" fill="#FF69B4"/>
       <rect x="11" y="26" width="3" height="4" fill="#FFE4C4"/>
       <rect x="20" y="26" width="3" height="4" fill="#FFE4C4"/>
