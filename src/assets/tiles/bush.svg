@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Bush tile -->
+  <ellipse cx="16" cy="20" rx="14" ry="10" fill="#228B22"/>
+  <ellipse cx="10" cy="18" rx="8" ry="8" fill="#2E9B2E"/>
+  <ellipse cx="22" cy="18" rx="8" ry="8" fill="#1E7B1E"/>
+  <ellipse cx="16" cy="14" rx="10" ry="8" fill="#2E9B2E"/>
+  <!-- Some berries -->
+  <circle cx="8" cy="20" r="2" fill="#FF0000"/>
+  <circle cx="24" cy="18" r="2" fill="#FF0000"/>
+</svg>

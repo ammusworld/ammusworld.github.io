@@ -1,0 +1,187 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a0a1a 0%, #2d1f3d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 32px;
+  color: var(--pink-medium);
+  text-shadow: 
+    2px 2px 0 var(--pink-dark),
+    4px 4px 0 rgba(0,0,0,0.5);
+  margin-bottom: 48px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.characterGrid {
+  display: flex;
+  gap: 64px;
+}
+
+.characterCard {
+  width: 200px;
+  height: 280px;
+  background: rgba(255,255,255,0.1);
+  border: 4px solid var(--pink-medium);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+.characterCard:hover,
+.characterCard.highlighted {
+  border-color: var(--pink-light);
+  box-shadow: 
+    0 0 20px var(--pink-medium),
+    inset 0 0 20px rgba(255,182,193,0.2);
+  transform: scale(1.05);
+}
+
+.characterCard.selected {
+  animation: selectBounce 0.5s ease;
+}
+
+@keyframes selectBounce {
+  0%, 100% { transform: scale(1.05); }
+  50% { transform: scale(1.15); }
+}
+
+.characterName {
+  font-size: 16px;
+  color: var(--white);
+  margin-top: 16px;
+}
+
+.spriteContainer {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.keyHint {
+  font-size: 12px;
+  color: var(--pink-light);
+  margin-top: auto;
+  padding: 8px 16px;
+  border: 2px solid var(--pink-light);
+  border-radius: 4px;
+}
+
+.instructions {
+  position: absolute;
+  bottom: 48px;
+  font-size: 12px;
+  color: var(--pink-light);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Floating Hearts */
+.heartsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floatingHeart {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUp linear forwards;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Music Toggle */
+.musicToggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid var(--pink-medium);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.musicToggle:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+.musicIcon {
+  font-size: 20px;
+}
+
+/* Swipe out animation */
+.swipeOut {
+  animation: swipeOut 0.8s ease-in-out forwards;
+}
+
+@keyframes swipeOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+}
+
+/* Animated Sprite */
+.animatedSprite {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

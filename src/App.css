@@ -1,0 +1,77 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--pink-medium);
+}
+
+.app h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 0 var(--pink-dark);
+}
+
+.app p {
+  font-size: 12px;
+  color: var(--pink-light);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Asset Preview Styles */
+.preview-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: var(--pink-light);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.preview-container h1 {
+  font-size: 24px;
+  color: var(--pink-medium);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.preview-container h2 {
+  font-size: 14px;
+  color: var(--pink-light);
+  margin: 20px 0 10px;
+  border-bottom: 2px solid var(--pink-dark);
+  padding-bottom: 5px;
+}
+
+.asset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.asset-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.asset-item img {
+  background: #333;
+  border: 2px solid var(--pink-dark);
+  border-radius: 4px;
+}
+
+.asset-item p {
+  font-size: 10px;
+  color: var(--pink-light);
+  margin: 0;
+}

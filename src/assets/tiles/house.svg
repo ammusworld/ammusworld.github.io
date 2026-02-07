@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <!-- House tile (96x96 - 3x3 tiles) -->
+  <!-- Foundation -->
+  <rect x="8" y="64" width="80" height="28" fill="#8B4513"/>
+  <rect x="12" y="68" width="72" height="20" fill="#A0522D"/>
+  
+  <!-- Walls -->
+  <rect x="8" y="32" width="80" height="36" fill="#FFE4C4"/>
+  <rect x="10" y="34" width="76" height="32" fill="#FFF8DC"/>
+  
+  <!-- Roof -->
+  <polygon points="48,4 8,32 88,32" fill="#FF69B4"/>
+  <polygon points="48,8 14,32 82,32" fill="#FF1493"/>
+  
+  <!-- Heart on roof -->
+  <path d="M48,16 C44,12 38,12 38,18 C38,22 48,28 48,28 C48,28 58,22 58,18 C58,12 52,12 48,16" fill="#FF0000"/>
+  
+  <!-- Window left -->
+  <rect x="18" y="42" width="16" height="16" fill="#87CEEB"/>
+  <rect x="18" y="42" width="16" height="16" fill="none" stroke="#8B4513" stroke-width="2"/>
+  <line x1="26" y1="42" x2="26" y2="58" stroke="#8B4513" stroke-width="1"/>
+  <line x1="18" y1="50" x2="34" y2="50" stroke="#8B4513" stroke-width="1"/>
+  
+  <!-- Window right -->
+  <rect x="62" y="42" width="16" height="16" fill="#87CEEB"/>
+  <rect x="62" y="42" width="16" height="16" fill="none" stroke="#8B4513" stroke-width="2"/>
+  <line x1="70" y1="42" x2="70" y2="58" stroke="#8B4513" stroke-width="1"/>
+  <line x1="62" y1="50" x2="78" y2="50" stroke="#8B4513" stroke-width="1"/>
+  
+  <!-- Door -->
+  <rect x="38" y="44" width="20" height="24" fill="#8B4513"/>
+  <rect x="40" y="46" width="16" height="20" fill="#A0522D"/>
+  <!-- Door heart -->
+  <path d="M48,52 C46,50 43,50 43,53 C43,55 48,58 48,58 C48,58 53,55 53,53 C53,50 50,50 48,52" fill="#FF69B4"/>
+  <!-- Door knob -->
+  <circle cx="52" cy="56" r="2" fill="#FFD700"/>
+</svg>

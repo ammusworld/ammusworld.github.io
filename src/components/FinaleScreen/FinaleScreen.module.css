@@ -1,0 +1,233 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #1a0a2e 0%,
+    #2d1b4e 25%,
+    #4a1942 50%,
+    #2d1b4e 75%,
+    #1a0a2e 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Background falling hearts */
+.heartsBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bgHeart {
+  position: absolute;
+  top: -50px;
+  color: var(--pink-medium);
+  opacity: 0.3;
+  animation: fall 8s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Confetti */
+.confettiContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  top: -20px;
+  border-radius: 2px;
+  animation: confettiFall 4s linear infinite;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Main message */
+.messageContainer {
+  text-align: center;
+  z-index: 10;
+}
+
+.title {
+  font-size: 48px;
+  color: var(--pink-light);
+  text-shadow:
+    0 0 10px var(--pink-medium),
+    0 0 20px var(--pink-medium),
+    0 0 40px var(--pink-dark),
+    4px 4px 0 var(--pink-dark);
+  margin: 0;
+  animation: titleAppear 1s ease-out;
+}
+
+@keyframes titleAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+  60% {
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.name {
+  font-size: 64px;
+  color: var(--red-heart);
+  text-shadow:
+    0 0 10px var(--red-heart),
+    0 0 30px var(--pink-medium),
+    4px 4px 0 #8B0000;
+  margin: 24px 0;
+  animation: nameAppear 1s ease-out, pulse 2s ease-in-out infinite;
+  animation-delay: 0s, 1s;
+}
+
+@keyframes nameAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.stats {
+  margin-top: 32px;
+  animation: statsAppear 0.8s ease-out;
+}
+
+@keyframes statsAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats p {
+  font-size: 16px;
+  color: var(--pink-light);
+  margin: 8px 0;
+}
+
+.heartCount {
+  font-size: 32px !important;
+  color: var(--red-heart) !important;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Decorative floating hearts around text */
+.decorativeHearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floatingHeart {
+  position: absolute;
+  font-size: 32px;
+  animation: floatAround 5s ease-in-out infinite;
+}
+
+.floatingHeart:nth-child(1) { top: 20%; left: 10%; }
+.floatingHeart:nth-child(2) { top: 30%; right: 15%; }
+.floatingHeart:nth-child(3) { bottom: 25%; left: 20%; }
+.floatingHeart:nth-child(4) { bottom: 30%; right: 10%; }
+.floatingHeart:nth-child(5) { top: 50%; left: 5%; }
+
+@keyframes floatAround {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-10px) rotate(-10deg);
+  }
+}
+
+/* Restart button */
+.restartButton {
+  margin-top: 32px;
+  padding: 12px 32px;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--white);
+  background: linear-gradient(180deg, var(--pink-medium) 0%, var(--pink-dark) 100%);
+  border: 2px solid var(--pink-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 0 var(--pink-dark), 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+.restartButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--pink-dark), 0 0 20px rgba(255, 105, 180, 0.7);
+}
+
+.restartButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--pink-dark), 0 0 10px rgba(255, 105, 180, 0.5);
+}

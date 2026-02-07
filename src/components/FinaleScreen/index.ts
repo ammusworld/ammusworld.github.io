@@ -1,0 +1,1 @@
+export { FinaleScreen } from './FinaleScreen';

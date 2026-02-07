@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Dudu (Mochi Bear) Sprite Sheet - 4x4 grid of 32x32 sprites -->
+  <!-- Cute white bear with round ears, rosy cheeks, tiny eyes -->
+  
+  <!-- Row 0: Down (facing camera) -->
+  <g id="down">
+    <!-- Frame 1 - Standing -->
+    <g transform="translate(0,0)">
+      <!-- Ears -->
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <!-- Head -->
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <!-- Eyes -->
+      <circle cx="12" cy="10" r="1.5" fill="#2D2D2D"/>
+      <circle cx="20" cy="10" r="1.5" fill="#2D2D2D"/>
+      <!-- Rosy cheeks -->
+      <ellipse cx="9" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="23" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <!-- Mouth (small w shape) -->
+      <path d="M14 14 Q15 15 16 14 Q17 15 18 14" stroke="#666" stroke-width="0.5" fill="none"/>
+      <!-- Body -->
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <!-- Feet -->
+      <ellipse cx="12" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <!-- Frame 2 - Walk Left -->
+    <g transform="translate(32,0)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <circle cx="12" cy="10" r="1.5" fill="#2D2D2D"/>
+      <circle cx="20" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="9" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="23" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <path d="M14 14 Q15 15 16 14 Q17 15 18 14" stroke="#666" stroke-width="0.5" fill="none"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="10" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <!-- Frame 3 - Standing -->
+    <g transform="translate(64,0)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <circle cx="12" cy="10" r="1.5" fill="#2D2D2D"/>
+      <circle cx="20" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="9" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="23" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <path d="M14 14 Q15 15 16 14 Q17 15 18 14" stroke="#666" stroke-width="0.5" fill="none"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="12" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <!-- Frame 4 - Walk Right -->
+    <g transform="translate(96,0)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <circle cx="12" cy="10" r="1.5" fill="#2D2D2D"/>
+      <circle cx="20" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="9" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="23" cy="13" rx="2.5" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <path d="M14 14 Q15 15 16 14 Q17 15 18 14" stroke="#666" stroke-width="0.5" fill="none"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="12" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="22" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+  </g>
+  
+  <!-- Row 1: Left -->
+  <g id="left">
+    <g transform="translate(0,32)">
+      <!-- Ear (visible one) -->
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <!-- Head (side view) -->
+      <ellipse cx="14" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <!-- Eye -->
+      <circle cx="10" cy="10" r="1.5" fill="#2D2D2D"/>
+      <!-- Cheek -->
+      <ellipse cx="7" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <!-- Body -->
+      <ellipse cx="14" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <!-- Feet -->
+      <ellipse cx="11" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="18" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(32,32)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="14" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="10" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="7" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="14" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="9" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="18" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(64,32)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="14" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="10" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="7" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="14" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="11" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="18" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(96,32)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="14" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="10" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="7" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="14" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="13" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+  </g>
+  
+  <!-- Row 2: Right -->
+  <g id="right">
+    <g transform="translate(0,64)">
+      <!-- Ear (visible one) -->
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <!-- Head (side view) -->
+      <ellipse cx="18" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <!-- Eye -->
+      <circle cx="22" cy="10" r="1.5" fill="#2D2D2D"/>
+      <!-- Cheek -->
+      <ellipse cx="25" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <!-- Body -->
+      <ellipse cx="18" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <!-- Feet -->
+      <ellipse cx="14" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="21" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(32,64)">
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="18" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="22" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="25" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="18" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="12" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="21" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(64,64)">
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="18" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="22" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="25" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="18" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="14" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="21" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(96,64)">
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="18" cy="11" rx="8" ry="9" fill="#F5F0E6"/>
+      <circle cx="22" cy="10" r="1.5" fill="#2D2D2D"/>
+      <ellipse cx="25" cy="13" rx="2" ry="1.5" fill="#FFAAAA" opacity="0.7"/>
+      <ellipse cx="18" cy="24" rx="6" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="14" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="23" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+  </g>
+  
+  <!-- Row 3: Up (back view) -->
+  <g id="up">
+    <g transform="translate(0,96)">
+      <!-- Ears -->
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <!-- Head (back) -->
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <!-- Body -->
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <!-- Feet -->
+      <ellipse cx="12" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(32,96)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="10" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(64,96)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="12" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="20" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+    <g transform="translate(96,96)">
+      <circle cx="10" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="22" cy="5" r="3" fill="#F5F0E6"/>
+      <circle cx="10" cy="5" r="1.5" fill="#D4A98C"/>
+      <circle cx="22" cy="5" r="1.5" fill="#D4A98C"/>
+      <ellipse cx="16" cy="11" rx="10" ry="9" fill="#F5F0E6"/>
+      <ellipse cx="16" cy="24" rx="7" ry="6" fill="#F5F0E6"/>
+      <ellipse cx="12" cy="28" rx="3" ry="2" fill="#F5F0E6"/>
+      <ellipse cx="22" cy="29" rx="3" ry="2" fill="#F5F0E6"/>
+    </g>
+  </g>
+</svg>

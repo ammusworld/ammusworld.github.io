@@ -1,0 +1,247 @@
+.gameScreen {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a0a1a 0%, #2d1f3d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.viewport {
+  width: 960px;
+  height: 704px;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid var(--pink-medium);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(255, 105, 180, 0.5),
+    inset 0 0 10px rgba(0, 0, 0, 0.3);
+  background: #4a7c59; /* Grass green fallback */
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+}
+
+.tileLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.tile {
+  position: absolute;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.character {
+  position: absolute;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  z-index: 50;
+  transition: transform 0.1s linear;
+}
+
+.characterSprite {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hearts layer */
+.heartsLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.collectibleHeart {
+  position: absolute;
+  animation: heartBob 1s ease-in-out infinite;
+}
+
+@keyframes heartBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.heartCollected {
+  animation: heartCollect 0.5s ease-out forwards;
+}
+
+@keyframes heartCollect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) translateY(-50px);
+    opacity: 0;
+  }
+}
+
+/* UI Elements */
+.uiOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.heartCounter {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--pink-medium);
+}
+
+.heartIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.heartCountText {
+  font-size: 16px;
+  color: var(--white);
+}
+
+.instructions {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--pink-light);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* House entrance hint */
+.houseHint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: var(--pink-light);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 16px 24px;
+  border-radius: 8px;
+  border: 2px solid var(--pink-medium);
+  text-align: center;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+/* House prompt */
+.housePrompt {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--white);
+  padding: 8px 16px;
+  border: 2px solid var(--pink-medium);
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  animation: bob 1s ease-in-out infinite;
+  z-index: 200;
+  pointer-events: none;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Speech bubble for locked house */
+.speechBubble {
+  position: absolute;
+  background: var(--white);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 9px;
+  white-space: nowrap;
+  z-index: 210;
+  pointer-events: none;
+  animation: bubbleAppear 0.3s ease-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.speechBubbleTail {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--white);
+}
+
+@keyframes bubbleAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Address sign */
+.addressSign {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.signPost {
+  width: 4px;
+  height: 20px;
+  background: #5D4E37;
+}
+
+.signBoard {
+  background: #8B7355;
+  color: var(--white);
+  padding: 4px 6px;
+  border: 2px solid #5D4E37;
+  border-radius: 2px;
+  font-size: 6px;
+  white-space: nowrap;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}

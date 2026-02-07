@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  /* Color Palette */
+  --pink-light: #FFB6C1;
+  --pink-medium: #FF69B4;
+  --pink-dark: #FF1493;
+  --red-heart: #FF0000;
+  --purple-soft: #DDA0DD;
+  --green-grass: #228B22;
+  --brown-dirt: #8B4513;
+  --gray-stone: #696969;
+  --white: #FFFFFF;
+  --black: #000000;
+  
+  /* Pixel-perfect sizing */
+  --tile-size: 32px;
+  --sprite-size: 32px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--black);
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* CRT Scanline Effect Overlay */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* Pixel-perfect images */
+img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

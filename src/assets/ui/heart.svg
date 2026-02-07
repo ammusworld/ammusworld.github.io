@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Collectible Heart -->
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Heart shape with glow -->
+  <path d="M16,28 C16,28 4,20 4,12 C4,6 9,4 16,10 C23,4 28,6 28,12 C28,20 16,28 16,28" 
+        fill="#FF0000" filter="url(#glow)"/>
+  <!-- Highlight -->
+  <ellipse cx="10" cy="10" rx="3" ry="2" fill="#FF6666" transform="rotate(-30 10 10)"/>
+  <!-- Sparkle -->
+  <circle cx="22" cy="8" r="1" fill="#FFFFFF"/>
+</svg>
