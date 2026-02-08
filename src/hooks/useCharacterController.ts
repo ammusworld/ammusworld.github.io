@@ -13,6 +13,7 @@ interface UseCharacterControllerOptions {
   mapData: MapData
   tileSize?: number
   onMove?: (newPos: Position) => void
+  onJump?: (pos: Position) => void
   isPaused?: boolean
 }
 
@@ -34,6 +35,7 @@ export function useCharacterController({
   mapData,
   tileSize = TILE_SIZE,
   onMove,
+  onJump,
   isPaused = false,
 }: UseCharacterControllerOptions): CharacterController {
   const [gridPos, setGridPos] = useState<Position>(initialPos)
@@ -173,8 +175,9 @@ export function useCharacterController({
   useEffect(() => {
     if (keys.jump && !isJumping && !isPaused) {
       startJumpAnimation()
+      onJump?.(gridPos)
     }
-  }, [keys.jump, isJumping, isPaused, startJumpAnimation])
+  }, [keys.jump, isJumping, isPaused, startJumpAnimation, onJump, gridPos])
   
   return {
     gridPos,

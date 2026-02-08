@@ -1,0 +1,1 @@
+export { SecretGallery } from './SecretGallery'

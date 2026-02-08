@@ -1,5 +1,6 @@
 import { useCallback, memo, useState, useEffect, useRef } from 'react'
 import type { Character as CharacterType, HeartPosition, StreetLabel } from '../../types/game'
+import { TileType } from '../../types/game'
 import { ASSETS } from '../../utils/assets'
 import { MAP_DATA, TILE_SIZE, VIEWPORT_WIDTH, VIEWPORT_HEIGHT } from '../../data/mapData'
 import { useCamera, useVisibleTiles } from '../../hooks/useCamera'
@@ -10,6 +11,8 @@ import { checkHeartCollision, checkHouseCollision } from '../../utils/collision'
 import { Character } from '../Character'
 import { TileRenderer } from './TileRenderer'
 import { DPad } from '../DPad'
+import { PasswordModal } from '../PasswordModal'
+import { SecretGallery } from '../SecretGallery'
 import styles from './GameMap.module.css'
 
 // Hook to calculate viewport scale for mobile
@@ -152,6 +155,43 @@ export function GameMap({
   const isMobile = useMobile()
   const viewportScale = useViewportScale()
   
+  // Secret lake functionality
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [showSecretGallery, setShowSecretGallery] = useState(false)
+  
+  // Check if position is adjacent to water (lake)
+  const isAdjacentToWater = useCallback((pos: { x: number; y: number }) => {
+    const directions = [
+      { dx: 0, dy: -1 },  // up
+      { dx: 0, dy: 1 },   // down
+      { dx: -1, dy: 0 },  // left
+      { dx: 1, dy: 0 },   // right
+    ]
+    
+    for (const { dx, dy } of directions) {
+      const checkX = pos.x + dx
+      const checkY = pos.y + dy
+      if (checkX >= 0 && checkX < MAP_DATA.width && checkY >= 0 && checkY < MAP_DATA.height) {
+        if (MAP_DATA.layers.ground[checkY][checkX] === TileType.WATER) {
+          return true
+        }
+      }
+    }
+    return false
+  }, [])
+  
+  // Handle jump near lake
+  const handleJump = useCallback((pos: { x: number; y: number }) => {
+    if (isAdjacentToWater(pos) && !showPasswordModal && !showSecretGallery) {
+      setShowPasswordModal(true)
+    }
+  }, [isAdjacentToWater, showPasswordModal, showSecretGallery])
+  
+  const handlePasswordSuccess = useCallback(() => {
+    setShowPasswordModal(false)
+    setShowSecretGallery(true)
+  }, [])
+  
   // Handler for mobile tap on house prompt
   const handleHousePromptTap = useCallback(() => {
     if (isMobile && showHousePrompt && !isPaused) {
@@ -191,7 +231,8 @@ export function GameMap({
     mapData: MAP_DATA,
     tileSize: TILE_SIZE,
     onMove: handleMove,
-    isPaused,
+    onJump: handleJump,
+    isPaused: isPaused || showPasswordModal || showSecretGallery,
   })
   
   const camera = useCamera({
@@ -411,6 +452,19 @@ export function GameMap({
           : `Arrow keys or WASD to move • SPACE to jump • Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
         }
       </p>
+      
+      {/* Secret lake modals */}
+      <PasswordModal
+        isOpen={showPasswordModal}
+        onClose={() => setShowPasswordModal(false)}
+        onSuccess={handlePasswordSuccess}
+      />
+      
+      <SecretGallery
+        isOpen={showSecretGallery}
+        onClose={() => setShowSecretGallery(false)}
+        photoCount={MAP_DATA.heartPositions.length}
+      />
     </div>
   )
 }
