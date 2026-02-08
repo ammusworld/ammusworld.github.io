@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Character } from '../../types/game';
 import { FloatingHearts } from './FloatingHearts';
 import { CharacterCard } from './CharacterCard';
 import { MusicToggle } from './MusicToggle';
+import { TitleButterflies } from './TitleButterflies';
 import { useMobile } from '../../hooks/useMobile';
 import styles from './PlayerSelect.module.css';
 
@@ -22,6 +23,7 @@ export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: 
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const isMobile = useMobile();
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const handleSelect = useCallback((character: Character) => {
     if (selectedCharacter) return; // Already selected
@@ -70,7 +72,10 @@ export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: 
       
       <MusicToggle isPlaying={isMusicPlaying} onToggle={onToggleMusic} />
       
-      <h1 className={styles.gameTitle}>Ammu's World</h1>
+      <div className={styles.titleWrapper}>
+        <h1 ref={titleRef} className={styles.gameTitle}>Ammu's World</h1>
+        <TitleButterflies titleRef={titleRef} />
+      </div>
       
       <h2 className={styles.title}>Choose Your Character</h2>
       

@@ -47,6 +47,37 @@
   }
 }
 
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.titleWrapper .gameTitle {
+  margin-bottom: 0;
+}
+
+.butterfliesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.flyingButterfly {
+  position: absolute;
+  width: 32px;
+  height: 64px;
+  background-size: 96px 256px; /* 2x scale of 48x128 sprite sheet */
+  image-rendering: pixelated;
+  transition: left 0.05s linear, top 0.05s linear;
+}
+
 .title {
   font-size: 32px;
   color: var(--pink-medium);
@@ -227,6 +258,16 @@
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+  .titleWrapper {
+    margin-bottom: 32px;
+  }
+  
+  .flyingButterfly {
+    width: 24px;
+    height: 48px;
+    background-size: 72px 192px; /* 1.5x scale */
+  }
+  
   .gameTitle {
     font-size: 32px;
     letter-spacing: 2px;
