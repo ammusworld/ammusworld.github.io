@@ -7,7 +7,7 @@ import { useCamera, useVisibleTiles } from '../../hooks/useCamera'
 import { useCharacterController } from '../../hooks/useCharacterController'
 import { useKeyboardInput } from '../../hooks/useKeyboardInput'
 import { useMobile } from '../../hooks/useMobile'
-import { checkHeartCollision, checkHouseCollision } from '../../utils/collision'
+import { checkHeartCollision } from '../../utils/collision'
 import { Character } from '../Character'
 import { TileRenderer } from './TileRenderer'
 import { DPad } from '../DPad'
@@ -218,12 +218,7 @@ export function GameMap({
       sfx.play().catch(() => {})
       onHeartCollected(heartIndex)
     }
-    
-    // Check for house collision (only if all hearts collected)
-    if (checkHouseCollision(newPos, MAP_DATA.housePosition, collectedHearts, MAP_DATA.heartPositions.length)) {
-      onHouseReached()
-    }
-  }, [collectedHearts, onHeartCollected, onHouseReached, isPaused])
+  }, [collectedHearts, onHeartCollected, isPaused])
   
   const {
     gridPos,
@@ -311,10 +306,10 @@ export function GameMap({
   
   // Handle space/enter to enter house
   useEffect(() => {
-    if (isAtHouseDoor && allHeartsCollected && keys.action && !isPaused) {
+    if (showHousePrompt && keys.action && !isPaused) {
       onHouseReached()
     }
-  }, [isAtHouseDoor, allHeartsCollected, keys.action, isPaused, onHouseReached])
+  }, [showHousePrompt, keys.action, isPaused, onHouseReached])
   
   return (
     <div className={styles.gameScreen}>
@@ -409,7 +404,7 @@ export function GameMap({
               onClick={isMobile ? handleHousePromptTap : undefined}
               onTouchEnd={isMobile ? (e) => { e.preventDefault(); handleHousePromptTap(); } : undefined}
             >
-              {isMobile ? 'Tap to enter' : 'Press SPACE to enter'}
+              {isMobile ? 'Tap to enter' : 'Press ENTER to enter'}
             </button>
           )}
           
