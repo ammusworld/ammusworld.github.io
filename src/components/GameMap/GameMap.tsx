@@ -13,6 +13,9 @@ import { TileRenderer } from './TileRenderer'
 import { DPad } from '../DPad'
 import { PasswordModal } from '../PasswordModal'
 import { SecretGallery } from '../SecretGallery'
+import { FirefliesLayer } from '../Fireflies'
+import { NightModeToggle } from '../NightModeToggle'
+import { WildlifeLayer } from '../Wildlife'
 import styles from './GameMap.module.css'
 
 // Hook to calculate viewport scale for mobile
@@ -158,6 +161,9 @@ export function GameMap({
   // Secret lake functionality
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [showSecretGallery, setShowSecretGallery] = useState(false)
+  
+  // Night mode with fireflies
+  const [isNightMode, setIsNightMode] = useState(false)
   
   // Check if position is adjacent to water (lake)
   const isAdjacentToWater = useCallback((pos: { x: number; y: number }) => {
@@ -327,7 +333,7 @@ export function GameMap({
           }}
         >
           <div
-            className={styles.mapContainer}
+            className={`${styles.mapContainer} ${isNightMode ? styles.nightMode : ''}`}
             style={{
               transform: `translate(${-camera.x}px, ${-camera.y}px)`,
               width: MAP_DATA.width * TILE_SIZE,
@@ -363,6 +369,15 @@ export function GameMap({
             tileSize={TILE_SIZE}
           />
           
+          {/* Wildlife - butterflies and birds */}
+          <WildlifeLayer
+            playerPos={gridPos}
+            mapWidth={MAP_DATA.width}
+            mapHeight={MAP_DATA.height}
+            tileSize={TILE_SIZE}
+            isPaused={isPaused || showPasswordModal || showSecretGallery}
+          />
+          
           {/* Player character */}
           <Character
             character={character}
@@ -371,6 +386,14 @@ export function GameMap({
             animationFrame={animationFrame}
             isMoving={isMoving}
             jumpOffset={jumpOffset}
+            tileSize={TILE_SIZE}
+          />
+          
+          {/* Fireflies (night mode only) */}
+          <FirefliesLayer
+            isNightMode={isNightMode}
+            mapWidth={MAP_DATA.width}
+            mapHeight={MAP_DATA.height}
             tileSize={TILE_SIZE}
           />
           
@@ -428,13 +451,19 @@ export function GameMap({
         {/* UI Overlay */}
         <div className={styles.uiOverlay}>
           <HeartCounter collected={collectedHearts.size} total={MAP_DATA.heartPositions.length} />
-          <button 
-            className={styles.musicToggle}
-            onClick={onToggleMusic}
-            aria-label={isMusicPlaying ? 'Mute music' : 'Unmute music'}
-          >
-            {isMusicPlaying ? '🔊' : '🔇'}
-          </button>
+          <div className={styles.toggleButtons}>
+            <NightModeToggle
+              isNightMode={isNightMode}
+              onToggle={() => setIsNightMode(prev => !prev)}
+            />
+            <button 
+              className={styles.musicToggle}
+              onClick={onToggleMusic}
+              aria-label={isMusicPlaying ? 'Mute music' : 'Unmute music'}
+            >
+              {isMusicPlaying ? '🔊' : '🔇'}
+            </button>
+          </div>
         </div>
       </div>
       </div>

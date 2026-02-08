@@ -44,6 +44,11 @@
   top: 0;
   left: 0;
   image-rendering: pixelated;
+  transition: filter 0.5s ease;
+}
+
+.mapContainer.nightMode {
+  filter: brightness(0.35) saturate(0.7) hue-rotate(10deg);
 }
 
 .tileLayer {
@@ -172,11 +177,16 @@
   color: var(--white);
 }
 
-.musicToggle {
+.toggleButtons {
   position: absolute;
   top: 16px;
   left: 16px;
+  display: flex;
+  gap: 8px;
   pointer-events: auto;
+}
+
+.musicToggle {
   background: rgba(0, 0, 0, 0.7);
   border: 2px solid var(--pink-medium);
   border-radius: 8px;

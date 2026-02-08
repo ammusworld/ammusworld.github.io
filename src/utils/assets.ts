@@ -3,6 +3,8 @@
 
 import duduSprite from '../assets/sprites/dudu.svg'
 import chunguSprite from '../assets/sprites/chungu.svg'
+import butterflySprite from '../assets/sprites/butterfly.png'
+import birdSprite from '../assets/sprites/blue_bird.png'
 
 import grassTile from '../assets/tiles/grass.svg'
 import grassFlowersTile from '../assets/tiles/grass-flowers.svg'
@@ -22,6 +24,8 @@ export const ASSETS = {
   sprites: {
     dudu: duduSprite,
     chungu: chunguSprite,
+    butterfly: butterflySprite,
+    bird: birdSprite,
   },
   tiles: {
     grass: grassTile,
