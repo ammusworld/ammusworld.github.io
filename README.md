@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Ammu's World 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Valentine's Day themed mini-RPG web game built with love.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Explore a charming, "familiar" (IYKYK) top-down world, collect hearts that reveal special memories, and reach the house for a surprise!
 
-## React Compiler
+### Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Character Selection**: Choose between two adorable characters - Dudu the bear or Chungu
+- **Exploration**: Navigate through a beautiful pixel-art forest with paths, trees, and flowers
+- **Heart Collection**: Find and collect 10 hidden hearts scattered across the map
+- **Photo Memories**: Each heart reveals a special photo memory
+- **Celebration Finale**: Reach the house for a surprise!
 
-## Expanding the ESLint configuration
+### Controls
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Arrow keys** or **WASD** to move
+- **Space** or **Enter** to interact
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **React** + **TypeScript** + **Vite**
+- **CSS Modules** for styling
+- **Press Start 2P** font for retro pixel aesthetic
+- **GitHub Pages** for hosting
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Live Demo
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Visit [ammusworld.github.io](https://ammusworld.github.io) to play!
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+Made with 💕 by Kuchu
