@@ -463,7 +463,6 @@ export function GameMap({
       <SecretGallery
         isOpen={showSecretGallery}
         onClose={() => setShowSecretGallery(false)}
-        photoCount={MAP_DATA.heartPositions.length}
       />
     </div>
   )

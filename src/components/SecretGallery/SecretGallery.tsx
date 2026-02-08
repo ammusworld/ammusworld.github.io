@@ -11,7 +11,7 @@ interface SecretGalleryProps {
 export function SecretGallery({
   isOpen,
   onClose,
-  photoCount = 10,
+  photoCount = 7,
 }: Readonly<SecretGalleryProps>) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -19,7 +19,7 @@ export function SecretGallery({
   const isMobile = useMobile()
 
   const getPhotoSrc = (index: number) => 
-    `${import.meta.env.BASE_URL}photos/photo-${String(index + 1).padStart(2, '0')}.jpg`
+    `${import.meta.env.BASE_URL}photos/lake-photos/lake-${String(index + 1).padStart(2, '0')}.jpg`
 
   // Reset loading state when index changes
   useEffect(() => {
