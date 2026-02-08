@@ -7,6 +7,12 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 8px;
+}
+
+.viewportWrapper {
+  position: relative;
+  flex-shrink: 0;
 }
 
 .viewport {
@@ -20,6 +26,17 @@
     0 0 20px rgba(255, 105, 180, 0.5),
     inset 0 0 10px rgba(0, 0, 0, 0.3);
   background: #4a7c59; /* Grass green fallback */
+}
+
+/* Mobile - border scales with viewport */
+@media (max-width: 1024px) {
+  .gameScreen {
+    padding: 4px;
+  }
+  
+  .viewport {
+    border-width: 2px;
+  }
 }
 
 .mapContainer {
@@ -38,8 +55,12 @@
 
 .tile {
   position: absolute;
+  display: block;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  /* Slight scale to prevent sub-pixel gaps between tiles */
+  transform: scale(1.01);
+  transform-origin: center;
 }
 
 .character {
@@ -213,10 +234,17 @@
   border: 2px solid var(--pink-medium);
   border-radius: 4px;
   font-size: 10px;
+  font-family: inherit;
   white-space: nowrap;
   animation: bob 1s ease-in-out infinite;
   z-index: 200;
   pointer-events: none;
+  cursor: default;
+}
+
+.housePrompt.tappable {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 @keyframes bob {
@@ -287,4 +315,13 @@
   font-size: 6px;
   white-space: nowrap;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* D-pad container for mobile */
+.dpadContainer {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  pointer-events: auto;
+  z-index: 200;
 }

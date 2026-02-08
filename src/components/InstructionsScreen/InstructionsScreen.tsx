@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import { useMobile } from '../../hooks/useMobile';
 import styles from './InstructionsScreen.module.css';
 
 interface InstructionsScreenProps {
@@ -9,6 +10,7 @@ export const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
   onContinue,
 }) => {
   const [isExiting, setIsExiting] = useState(false);
+  const isMobile = useMobile();
   
   const handleContinue = useCallback(() => {
     if (isExiting) return;
@@ -25,8 +27,14 @@ export const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
       }
     };
     
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
+  }, [handleContinue]);
+
+  // Touch support for mobile
+  const handleTouch = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
+    handleContinue();
   }, [handleContinue]);
 
   const containerClasses = [
@@ -35,7 +43,7 @@ export const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} onTouchEnd={isMobile ? handleTouch : undefined}>
       <h1 className={styles.title}>Your Mission</h1>
       
       <div className={styles.instruction}>
@@ -45,11 +53,11 @@ export const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
           to enter the house
         </p>
         <p className={styles.subMessage}>
-          Use arrow keys or WASD to move
+          {isMobile ? 'Use the D-pad to move' : 'Use arrow keys or WASD to move'}
         </p>
       </div>
       
-      <p className={styles.prompt}>Press SPACE to start</p>
+      <p className={styles.prompt}>{isMobile ? 'Tap to start' : 'Press SPACE to start'}</p>
     </div>
   );
 };

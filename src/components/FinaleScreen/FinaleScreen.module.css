@@ -248,3 +248,58 @@
   transform: translateY(2px);
   box-shadow: 0 2px 0 var(--pink-dark), 0 0 10px rgba(255, 105, 180, 0.5);
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .messageContainer {
+    padding: 0 16px;
+  }
+  
+  .title {
+    font-size: 28px;
+    text-shadow:
+      0 0 8px var(--pink-medium),
+      0 0 16px var(--pink-medium),
+      2px 2px 0 var(--pink-dark);
+  }
+  
+  .name {
+    font-size: 40px;
+    margin: 16px 0;
+    text-shadow:
+      0 0 8px var(--red-heart),
+      0 0 20px var(--pink-medium),
+      2px 2px 0 #8B0000;
+  }
+  
+  .stats {
+    margin-top: 24px;
+  }
+  
+  .stats p {
+    font-size: 12px;
+  }
+  
+  .heartCount {
+    font-size: 24px !important;
+  }
+  
+  .restartButton {
+    margin-top: 24px;
+    padding: 10px 24px;
+    font-size: 12px;
+  }
+  
+  .footer {
+    bottom: 16px;
+    font-size: 14px;
+  }
+  
+  .floatingHeart {
+    font-size: 24px;
+  }
+  
+  .bgHeart {
+    font-size: 14px;
+  }
+}

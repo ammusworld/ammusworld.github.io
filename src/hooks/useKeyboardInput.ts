@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { useVirtualInputState } from './useVirtualInput'
 
-interface KeyboardState {
+export interface KeyboardState {
   up: boolean
   down: boolean
   left: boolean
@@ -18,9 +19,11 @@ const initialKeyState: KeyboardState = {
 
 /**
  * Hook to track keyboard input state for game controls
+ * Merges physical keyboard input with virtual input (D-pad, touch)
  */
 export function useKeyboardInput(): KeyboardState {
   const [keys, setKeys] = useState<KeyboardState>(initialKeyState)
+  const virtualInput = useVirtualInputState()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -95,5 +98,14 @@ export function useKeyboardInput(): KeyboardState {
     }
   }, [])
 
-  return keys
+  // Merge keyboard state with virtual input (D-pad, touch)
+  const mergedState = useMemo<KeyboardState>(() => ({
+    up: keys.up || virtualInput.up,
+    down: keys.down || virtualInput.down,
+    left: keys.left || virtualInput.left,
+    right: keys.right || virtualInput.right,
+    action: keys.action || virtualInput.action,
+  }), [keys, virtualInput])
+
+  return mergedState
 }

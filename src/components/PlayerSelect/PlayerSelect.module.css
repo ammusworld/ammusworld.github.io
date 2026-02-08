@@ -185,3 +185,52 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+    margin-bottom: 24px;
+    padding: 0 16px;
+    text-align: center;
+  }
+  
+  .characterGrid {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  
+  .characterCard {
+    width: 160px;
+    height: 200px;
+    padding: 12px;
+  }
+  
+  .spriteContainer {
+    width: 96px;
+    height: 96px;
+    margin-top: 8px;
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+  
+  .characterName {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  
+  .instructions {
+    bottom: 24px;
+    font-size: 10px;
+    padding: 0 16px;
+    text-align: center;
+  }
+  
+  .musicToggle {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Floating Heart (for background animations) -->
+  <path d="M16,28 C16,28 4,20 4,12 C4,6 9,4 16,10 C23,4 28,6 28,12 C28,20 16,28 16,28" 
+        fill="#FF69B4"/>
+  <ellipse cx="10" cy="10" rx="2" ry="1.5" fill="#FFB6C1" transform="rotate(-30 10 10)"/>
+</svg>

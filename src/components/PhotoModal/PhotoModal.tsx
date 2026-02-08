@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useMobile } from '../../hooks/useMobile'
 import styles from './PhotoModal.module.css'
 
 interface PhotoModalProps {
@@ -17,6 +18,7 @@ export function PhotoModal({
   collectedCount,
 }: Readonly<PhotoModalProps>) {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const isMobile = useMobile()
   
   // Get photo path - use base path for GitHub Pages
   const photoSrc = `${import.meta.env.BASE_URL}photos/photo-${String(photoIndex + 1).padStart(2, '0')}.svg`
@@ -69,7 +71,7 @@ export function PhotoModal({
         <div className={styles.counter}>
           {collectedCount} / {totalHearts}
         </div>
-        <p className={styles.hint}>Press space to continue</p>
+        <p className={styles.hint}>{isMobile ? 'Tap to continue' : 'Press space to continue'}</p>
       </div>
     </dialog>
   )

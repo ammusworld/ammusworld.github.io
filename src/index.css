@@ -29,6 +29,12 @@ html, body, #root {
   height: 100%;
   overflow: hidden;
   background-color: var(--black);
+  /* Prevent pull-to-refresh and other touch gestures */
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -55,6 +61,11 @@ body {
     transparent 1px,
     transparent 2px
   );
+}
+
+/* Hide CRT overlay when in game map */
+body.hide-crt .crt-overlay {
+  display: none;
 }
 
 /* Pixel-perfect images */
