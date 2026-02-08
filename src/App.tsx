@@ -8,6 +8,7 @@ import { CutsceneScreen } from './components/CutsceneScreen'
 import { FinaleScreen } from './components/FinaleScreen'
 import { MAP_DATA } from './data/mapData'
 import { useAudio } from './hooks/useAudio'
+import { VirtualInputProvider } from './hooks/useVirtualInput'
 import { ASSETS } from './utils/assets'
 import './App.css'
 
@@ -65,7 +66,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <VirtualInputProvider>
       {screen === 'select' && (
         <PlayerSelectScreen 
           onSelect={handleCharacterSelect}
@@ -107,7 +108,7 @@ function App() {
           onRestart={handleRestart}
         />
       )}
-    </>
+    </VirtualInputProvider>
   )
 }
 

@@ -9,6 +9,7 @@ interface CharacterCardProps {
   isSelected: boolean;
   onClick: () => void;
   keyHint: string;
+  isMobile?: boolean;
 }
 
 const CHARACTER_NAMES: Record<Character, string> = {
@@ -22,6 +23,7 @@ export function CharacterCard({
   isSelected,
   onClick,
   keyHint,
+  isMobile = false,
 }: Readonly<CharacterCardProps>) {
   const spriteSrc = ASSETS.sprites[character];
   
@@ -49,7 +51,7 @@ export function CharacterCard({
         />
       </div>
       <span className={styles.characterName}>{CHARACTER_NAMES[character]}</span>
-      <span className={styles.keyHint}>{keyHint}</span>
+      {!isMobile && <span className={styles.keyHint}>{keyHint}</span>}
     </button>
   );
 }

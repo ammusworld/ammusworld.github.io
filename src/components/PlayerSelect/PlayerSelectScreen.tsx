@@ -3,6 +3,7 @@ import type { Character } from '../../types/game';
 import { FloatingHearts } from './FloatingHearts';
 import { CharacterCard } from './CharacterCard';
 import { MusicToggle } from './MusicToggle';
+import { useMobile } from '../../hooks/useMobile';
 import styles from './PlayerSelect.module.css';
 
 interface PlayerSelectScreenProps {
@@ -20,6 +21,7 @@ const KEY_HINTS: Record<Character, string> = {
 export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: Readonly<PlayerSelectScreenProps>) {
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const isMobile = useMobile();
 
   const handleSelect = useCallback((character: Character) => {
     if (selectedCharacter) return; // Already selected
@@ -79,12 +81,13 @@ export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: 
             isSelected={selectedCharacter === character}
             onClick={() => handleSelect(character)}
             keyHint={KEY_HINTS[character]}
+            isMobile={isMobile}
           />
         ))}
       </div>
       
       <p className={styles.instructions}>
-        Use Arrow Keys to highlight, A/B or Enter to select
+        {isMobile ? 'Touch to select' : 'Use Arrow Keys to highlight, A/B or Enter to select'}
       </p>
     </div>
   );

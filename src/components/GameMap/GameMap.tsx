@@ -5,10 +5,37 @@ import { MAP_DATA, TILE_SIZE, VIEWPORT_WIDTH, VIEWPORT_HEIGHT } from '../../data
 import { useCamera, useVisibleTiles } from '../../hooks/useCamera'
 import { useCharacterController } from '../../hooks/useCharacterController'
 import { useKeyboardInput } from '../../hooks/useKeyboardInput'
+import { useMobile } from '../../hooks/useMobile'
 import { checkHeartCollision, checkHouseCollision } from '../../utils/collision'
 import { Character } from '../Character'
 import { TileRenderer } from './TileRenderer'
+import { DPad } from '../DPad'
 import styles from './GameMap.module.css'
+
+// Hook to calculate viewport scale for mobile
+function useViewportScale() {
+  const [scale, setScale] = useState(1)
+  
+  useEffect(() => {
+    const calculateScale = () => {
+      const padding = 16
+      const availableWidth = globalThis.innerWidth - padding
+      const availableHeight = globalThis.innerHeight - 60 // Leave room for instructions
+      
+      const scaleX = availableWidth / VIEWPORT_WIDTH
+      const scaleY = availableHeight / VIEWPORT_HEIGHT
+      
+      // Use the smaller scale to fit, but cap at 1 (no upscaling)
+      setScale(Math.min(1, scaleX, scaleY))
+    }
+    
+    calculateScale()
+    globalThis.addEventListener('resize', calculateScale)
+    return () => globalThis.removeEventListener('resize', calculateScale)
+  }, [])
+  
+  return scale
+}
 
 interface GameMapProps {
   character: CharacterType
@@ -122,6 +149,15 @@ export function GameMap({
   const lockedBubbleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const wasAtHouseDoorRef = useRef(false)
   const keys = useKeyboardInput()
+  const isMobile = useMobile()
+  const viewportScale = useViewportScale()
+  
+  // Handler for mobile tap on house prompt
+  const handleHousePromptTap = useCallback(() => {
+    if (isMobile && showHousePrompt && !isPaused) {
+      onHouseReached()
+    }
+  }, [isMobile, showHousePrompt, isPaused, onHouseReached])
   
   // Handle movement and check for collisions
   const handleMove = useCallback((newPos: { x: number; y: number }) => {
@@ -217,6 +253,14 @@ export function GameMap({
     }
   }, [])
   
+  // Hide CRT overlay while in game map
+  useEffect(() => {
+    document.body.classList.add('hide-crt')
+    return () => {
+      document.body.classList.remove('hide-crt')
+    }
+  }, [])
+  
   // Handle space/enter to enter house
   useEffect(() => {
     if (isAtHouseDoor && allHeartsCollected && keys.action && !isPaused) {
@@ -226,22 +270,35 @@ export function GameMap({
   
   return (
     <div className={styles.gameScreen}>
-      <div className={styles.viewport}>
-        <div
-          className={styles.mapContainer}
+      <div 
+        className={styles.viewportWrapper}
+        style={{
+          width: VIEWPORT_WIDTH * viewportScale,
+          height: VIEWPORT_HEIGHT * viewportScale,
+        }}
+      >
+        <div 
+          className={styles.viewport}
           style={{
-            transform: `translate(${-camera.x}px, ${-camera.y}px)`,
-            width: MAP_DATA.width * TILE_SIZE,
-            height: MAP_DATA.height * TILE_SIZE,
+            transform: `scale(${viewportScale})`,
+            transformOrigin: 'top left',
           }}
         >
-          {/* Ground layer */}
-          <TileRenderer
-            layer={MAP_DATA.layers.ground}
-            tileSize={TILE_SIZE}
-            visibleArea={visibleArea}
-            zIndex={0}
-          />
+          <div
+            className={styles.mapContainer}
+            style={{
+              transform: `translate(${-camera.x}px, ${-camera.y}px)`,
+              width: MAP_DATA.width * TILE_SIZE,
+              height: MAP_DATA.height * TILE_SIZE,
+            }}
+          >
+            {/* Ground layer */}
+            <TileRenderer
+              layer={MAP_DATA.layers.ground}
+              tileSize={TILE_SIZE}
+              visibleArea={visibleArea}
+              zIndex={0}
+            />
           
           {/* Objects layer */}
           <TileRenderer
@@ -276,15 +333,18 @@ export function GameMap({
           
           {/* House prompt */}
           {showHousePrompt && (
-            <div 
-              className={styles.housePrompt}
+            <button
+              type="button"
+              className={`${styles.housePrompt} ${isMobile ? styles.tappable : ''}`}
               style={{
                 left: pixelPos.x - 20,
                 top: pixelPos.y - 40,
               }}
+              onClick={isMobile ? handleHousePromptTap : undefined}
+              onTouchEnd={isMobile ? (e) => { e.preventDefault(); handleHousePromptTap(); } : undefined}
             >
-              Press SPACE to enter
-            </div>
+              {isMobile ? 'Tap to enter' : 'Press SPACE to enter'}
+            </button>
           )}
           
           {/* Locked house speech bubble */}
@@ -334,9 +394,20 @@ export function GameMap({
           </button>
         </div>
       </div>
+      </div>
+      
+      {/* D-pad for mobile - outside viewport so it doesn't get scaled */}
+      {isMobile && (
+        <div className={styles.dpadContainer}>
+          <DPad size={130} />
+        </div>
+      )}
       
       <p className={styles.instructions}>
-        Arrow keys or WASD to move • Collect all {MAP_DATA.heartPositions.length} hearts to enter the house
+        {isMobile 
+          ? `Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
+          : `Arrow keys or WASD to move • Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
+        }
       </p>
     </div>
   )
