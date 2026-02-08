@@ -75,3 +75,29 @@
   color: var(--pink-light);
   margin: 0;
 }
+
+/* Circular fade-out transition overlay (iris close effect) */
+@property --iris-size {
+  syntax: '<percentage>';
+  initial-value: 100%;
+  inherits: false;
+}
+
+.circular-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, transparent var(--iris-size), #000 var(--iris-size));
+  animation: irisClose 1.5s ease-in-out forwards;
+  --iris-size: 100%;
+}
+
+@keyframes irisClose {
+  0% {
+    --iris-size: 100%;
+  }
+  100% {
+    --iris-size: 0%;
+  }
+}

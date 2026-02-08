@@ -16,7 +16,8 @@ function App() {
   const [character, setCharacter] = useState<Character | null>(null)
   const [collectedHearts, setCollectedHearts] = useState<Set<number>>(new Set())
   const [showingPhotoIndex, setShowingPhotoIndex] = useState<number | null>(null)
-  const [currentMusic, setCurrentMusic] = useState(ASSETS.audio.bgm)
+  const [currentMusic, setCurrentMusic] = useState(ASSETS.audio.bgm as string)
+  const [showTransition, setShowTransition] = useState(false)
   
   // Global audio state - persists across all screens
   const { isPlaying: isMusicPlaying, toggle: toggleMusic } = useAudio(currentMusic)
@@ -43,7 +44,12 @@ function App() {
 
   const handleHouseReached = useCallback(() => {
     setCurrentMusic(ASSETS.audio.finale)
-    setScreen('cutscene')
+    setShowTransition(true)
+    // After transition animation, switch to cutscene
+    setTimeout(() => {
+      setShowTransition(false)
+      setScreen('cutscene')
+    }, 1500)
   }, [])
 
   const handleCutsceneComplete = useCallback(() => {
@@ -77,7 +83,7 @@ function App() {
             onHouseReached={handleHouseReached}
             onHeartCollected={handleHeartCollected}
             collectedHearts={collectedHearts}
-            isPaused={showingPhotoIndex !== null}
+            isPaused={showingPhotoIndex !== null || showTransition}
             isMusicPlaying={isMusicPlaying}
             onToggleMusic={toggleMusic}
           />
@@ -88,6 +94,7 @@ function App() {
             totalHearts={MAP_DATA.heartPositions.length}
             collectedCount={collectedHearts.size}
           />
+          {showTransition && <div className="circular-transition-overlay" />}
         </>
       )}
       {screen === 'cutscene' && (

@@ -83,8 +83,8 @@ export function checkHeartCollision(
 export function checkHouseCollision(
   playerPos: { x: number; y: number },
   housePosition: { x: number; y: number },
-  collectedHearts: Set<number>,
-  totalHearts: number
+  _collectedHearts: Set<number>,
+  _totalHearts: number
 ): boolean {
   // Door is at center of house, one tile below the house
   const doorX = housePosition.x + 1
