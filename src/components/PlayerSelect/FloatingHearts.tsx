@@ -18,14 +18,14 @@ const HEART_COLORS = [
   '#fd79a8', // pastel pink
 ];
 
-export function FloatingHearts({ count = 25 }: Readonly<{ count?: number }>) {
+export function FloatingHearts({ count = 9 }: Readonly<{ count?: number }>) {
   const hearts = useMemo<FloatingHeart[]>(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       size: 12 + Math.random() * 24,
       duration: 8 + Math.random() * 12,
-      delay: Math.random() * 15,
+      delay: Math.random() * 8,
       color: HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)],
     }));
   }, [count]);

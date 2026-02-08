@@ -66,11 +66,13 @@ export function PlayerSelectScreen({ onSelect, isMusicPlaying, onToggleMusic }: 
 
   return (
     <div className={containerClasses}>
-      <FloatingHearts count={25} />
+      <FloatingHearts count={15} />
       
       <MusicToggle isPlaying={isMusicPlaying} onToggle={onToggleMusic} />
       
-      <h1 className={styles.title}>Choose Your Character</h1>
+      <h1 className={styles.gameTitle}>Ammu's World</h1>
+      
+      <h2 className={styles.title}>Choose Your Character</h2>
       
       <div className={styles.characterGrid}>
         {CHARACTERS.map((character, index) => (
