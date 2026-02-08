@@ -21,7 +21,7 @@ export function PhotoModal({
   const isMobile = useMobile()
   
   // Get photo path - use base path for GitHub Pages
-  const photoSrc = `${import.meta.env.BASE_URL}photos/photo-${String(photoIndex + 1).padStart(2, '0')}.svg`
+  const photoSrc = `${import.meta.env.BASE_URL}photos/photo-${String(photoIndex + 1).padStart(2, '0')}.jpg`
   
   // Open/close dialog and handle keyboard
   useEffect(() => {

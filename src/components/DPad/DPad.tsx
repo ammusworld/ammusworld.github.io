@@ -6,10 +6,11 @@ type Direction = 'up' | 'down' | 'left' | 'right'
 
 interface DPadProps {
   size?: number
+  showJumpButton?: boolean
 }
 
-export function DPad({ size = 140 }: Readonly<DPadProps>) {
-  const { setDirection } = useVirtualInput()
+export function DPad({ size = 140, showJumpButton = true }: Readonly<DPadProps>) {
+  const { setDirection, triggerJump } = useVirtualInput()
   const containerRef = useRef<HTMLDivElement>(null)
   const activeDirectionsRef = useRef<Set<Direction>>(new Set())
   const buttonRectsRef = useRef<Map<Direction, DOMRect>>(new Map())
@@ -70,6 +71,12 @@ export function DPad({ size = 140 }: Readonly<DPadProps>) {
     activeDirectionsRef.current.delete(direction)
     setDirection(direction, false)
   }, [setDirection])
+
+  const handleJumpTouchStart = useCallback((e: React.TouchEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    triggerJump()
+  }, [triggerJump])
 
   const buttonSize = size * 0.35
   const centerOffset = (size - buttonSize) / 2
@@ -162,6 +169,23 @@ export function DPad({ size = 140 }: Readonly<DPadProps>) {
           top: centerOffset + buttonSize * 0.2,
         }}
       />
+      
+      {/* Jump button positioned to the left of D-pad */}
+      {showJumpButton && (
+        <button
+          className={`${styles.button} ${styles.jumpButton}`}
+          style={{
+            width: buttonSize * 1.2,
+            height: buttonSize * 1.2,
+            left: -buttonSize * 1.6,
+            top: centerOffset - buttonSize * 0.1,
+          }}
+          onTouchStart={handleJumpTouchStart}
+          aria-label="Jump"
+        >
+          <span className={styles.jumpLabel}>JUMP</span>
+        </button>
+      )}
     </div>
   )
 }

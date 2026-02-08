@@ -185,6 +185,7 @@ export function GameMap({
     direction,
     isMoving,
     animationFrame,
+    jumpOffset,
   } = useCharacterController({
     initialPos: MAP_DATA.playerSpawn,
     mapData: MAP_DATA,
@@ -328,6 +329,7 @@ export function GameMap({
             direction={direction}
             animationFrame={animationFrame}
             isMoving={isMoving}
+            jumpOffset={jumpOffset}
             tileSize={TILE_SIZE}
           />
           
@@ -406,7 +408,7 @@ export function GameMap({
       <p className={styles.instructions}>
         {isMobile 
           ? `Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
-          : `Arrow keys or WASD to move • Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
+          : `Arrow keys or WASD to move • SPACE to jump • Collect all ${MAP_DATA.heartPositions.length} hearts to enter the house`
         }
       </p>
     </div>

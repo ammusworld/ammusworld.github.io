@@ -6,12 +6,14 @@ interface VirtualInputState {
   left: boolean
   right: boolean
   action: boolean
+  jump: boolean
 }
 
 interface VirtualInputContextType {
   state: VirtualInputState
   setDirection: (direction: 'up' | 'down' | 'left' | 'right', pressed: boolean) => void
   triggerAction: () => void
+  triggerJump: () => void
 }
 
 const initialState: VirtualInputState = {
@@ -20,6 +22,7 @@ const initialState: VirtualInputState = {
   left: false,
   right: false,
   action: false,
+  jump: false,
 }
 
 const VirtualInputContext = createContext<VirtualInputContextType | null>(null)
@@ -39,9 +42,17 @@ export function VirtualInputProvider({ children }: Readonly<{ children: ReactNod
     }, 100)
   }, [])
 
+  const triggerJump = useCallback(() => {
+    setState((prev) => ({ ...prev, jump: true }))
+    // Reset jump after a brief moment (like a key press)
+    setTimeout(() => {
+      setState((prev) => ({ ...prev, jump: false }))
+    }, 100)
+  }, [])
+
   const value = useMemo(
-    () => ({ state, setDirection, triggerAction }),
-    [state, setDirection, triggerAction]
+    () => ({ state, setDirection, triggerAction, triggerJump }),
+    [state, setDirection, triggerAction, triggerJump]
   )
 
   return (
@@ -59,6 +70,7 @@ export function useVirtualInput(): VirtualInputContextType {
       state: initialState,
       setDirection: () => {},
       triggerAction: () => {},
+      triggerJump: () => {},
     }
   }
   return context

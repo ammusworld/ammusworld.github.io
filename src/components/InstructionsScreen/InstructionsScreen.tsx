@@ -53,7 +53,7 @@ export const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
           to enter the house
         </p>
         <p className={styles.subMessage}>
-          {isMobile ? 'Use the D-pad to move' : 'Use arrow keys or WASD to move'}
+          {isMobile ? 'Use the D-pad to move' : 'Use arrow keys or WASD to move, SPACE to jump'}
         </p>
       </div>
       

@@ -9,6 +9,7 @@ interface CharacterProps {
   direction: Direction
   animationFrame: number
   isMoving: boolean
+  jumpOffset?: number
   tileSize?: number
 }
 
@@ -25,6 +26,7 @@ export const Character = memo(function Character({
   direction,
   animationFrame,
   isMoving,
+  jumpOffset = 0,
   tileSize = 32,
 }: Readonly<CharacterProps>) {
   const spriteSheet = ASSETS.sprites[character]
@@ -43,7 +45,8 @@ export const Character = memo(function Character({
       style={{
         left: pixelPos.x,
         // Offset Y slightly so sprite appears above tile (feet on ground)
-        top: pixelPos.y - tileSize * 0.25,
+        // Subtract jumpOffset to move character up when jumping
+        top: pixelPos.y - tileSize * 0.25 - jumpOffset,
         width: tileSize,
         height: tileSize * 1.5,
       }}

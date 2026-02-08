@@ -90,11 +90,10 @@ export function checkHouseCollision(
   const doorX = housePosition.x + 1
   const doorY = housePosition.y + 3 // Just below house
   
-  // TODO: Remove this hack after testing
   // Only trigger if all hearts collected
-  // if (collectedHearts.size < totalHearts) {
-  //   return false
-  // }
+  if (_collectedHearts.size < _totalHearts) {
+    return false
+  }
   
   return playerPos.x === doorX && playerPos.y === doorY
 }

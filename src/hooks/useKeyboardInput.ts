@@ -7,6 +7,7 @@ export interface KeyboardState {
   left: boolean
   right: boolean
   action: boolean
+  jump: boolean
 }
 
 const initialKeyState: KeyboardState = {
@@ -15,6 +16,7 @@ const initialKeyState: KeyboardState = {
   left: false,
   right: false,
   action: false,
+  jump: false,
 }
 
 /**
@@ -53,9 +55,11 @@ export function useKeyboardInput(): KeyboardState {
         case 'D':
           setKeys(k => ({ ...k, right: true }))
           break
-        case ' ':
         case 'Enter':
           setKeys(k => ({ ...k, action: true }))
+          break
+        case ' ':
+          setKeys(k => ({ ...k, jump: true }))
           break
       }
     }
@@ -82,9 +86,11 @@ export function useKeyboardInput(): KeyboardState {
         case 'D':
           setKeys(k => ({ ...k, right: false }))
           break
-        case ' ':
         case 'Enter':
           setKeys(k => ({ ...k, action: false }))
+          break
+        case ' ':
+          setKeys(k => ({ ...k, jump: false }))
           break
       }
     }
@@ -105,6 +111,7 @@ export function useKeyboardInput(): KeyboardState {
     left: keys.left || virtualInput.left,
     right: keys.right || virtualInput.right,
     action: keys.action || virtualInput.action,
+    jump: keys.jump || virtualInput.jump,
   }), [keys, virtualInput])
 
   return mergedState

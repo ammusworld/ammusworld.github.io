@@ -5,6 +5,8 @@ import { useKeyboardInput } from './useKeyboardInput'
 
 const TILE_SIZE = 32
 const MOVE_DURATION = 200 // ms per tile movement
+const JUMP_DURATION = 400 // ms for full jump
+const JUMP_HEIGHT = 24 // pixels to jump up
 
 interface UseCharacterControllerOptions {
   initialPos: Position
@@ -20,6 +22,8 @@ interface CharacterController {
   direction: Direction
   isMoving: boolean
   animationFrame: number
+  isJumping: boolean
+  jumpOffset: number
 }
 
 /**
@@ -40,8 +44,11 @@ export function useCharacterController({
   const [direction, setDirection] = useState<Direction>('down')
   const [isMoving, setIsMoving] = useState(false)
   const [animationFrame, setAnimationFrame] = useState(0)
+  const [isJumping, setIsJumping] = useState(false)
+  const [jumpOffset, setJumpOffset] = useState(0)
   
   const animationRef = useRef<number | null>(null)
+  const jumpAnimationRef = useRef<number | null>(null)
   const keys = useKeyboardInput()
   
   // Clean up animation on unmount
@@ -49,6 +56,9 @@ export function useCharacterController({
     return () => {
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current)
+      }
+      if (jumpAnimationRef.current !== null) {
+        cancelAnimationFrame(jumpAnimationRef.current)
       }
     }
   }, [])
@@ -88,6 +98,32 @@ export function useCharacterController({
     
     animationRef.current = requestAnimationFrame(animate)
   }, [tileSize])
+  
+  // Start jump animation
+  const startJumpAnimation = useCallback(() => {
+    if (isJumping) return
+    
+    setIsJumping(true)
+    const startTime = performance.now()
+    
+    const animateJump = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / JUMP_DURATION, 1)
+      
+      // Parabolic curve: up then down using sine
+      const jumpProgress = Math.sin(progress * Math.PI)
+      setJumpOffset(jumpProgress * JUMP_HEIGHT)
+      
+      if (progress < 1) {
+        jumpAnimationRef.current = requestAnimationFrame(animateJump)
+      } else {
+        setJumpOffset(0)
+        setIsJumping(false)
+      }
+    }
+    
+    jumpAnimationRef.current = requestAnimationFrame(animateJump)
+  }, [isJumping])
   
   // Handle movement based on key state
   useEffect(() => {
@@ -133,11 +169,20 @@ export function useCharacterController({
     }
   }, [keys, isMoving, isPaused, gridPos, mapData, startMoveAnimation, onMove])
   
+  // Handle jump input
+  useEffect(() => {
+    if (keys.jump && !isJumping && !isPaused) {
+      startJumpAnimation()
+    }
+  }, [keys.jump, isJumping, isPaused, startJumpAnimation])
+  
   return {
     gridPos,
     pixelPos,
     direction,
     isMoving,
     animationFrame,
+    isJumping,
+    jumpOffset,
   }
 }
