@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useMobile } from '../../hooks/useMobile'
 import styles from './PhotoModal.module.css'
 
@@ -19,9 +19,15 @@ export function PhotoModal({
 }: Readonly<PhotoModalProps>) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const isMobile = useMobile()
+  const [isLoading, setIsLoading] = useState(true)
   
   // Get photo path - use base path for GitHub Pages
   const photoSrc = `${import.meta.env.BASE_URL}photos/photo-${String(photoIndex + 1).padStart(2, '0')}.jpg`
+  
+  // Reset loading state when photo changes
+  useEffect(() => {
+    setIsLoading(true)
+  }, [photoIndex])
   
   // Open/close dialog and handle keyboard
   useEffect(() => {
@@ -63,11 +69,14 @@ export function PhotoModal({
         className={styles.modal}
       >
         <div className={styles.frame}>
+          {isLoading && <div className={styles.loader}>Loading...</div>}
           <img 
             src={photoSrc} 
-            alt={`Memory ${photoIndex + 1}`} 
+            alt={`Memory ${photoIndex + 1}`}
+            onLoad={() => setIsLoading(false)}
+            style={{ opacity: isLoading ? 0 : 1 }}
           />
-        </div>a
+        </div>
         <div className={styles.counter}>
           {collectedCount} / {totalHearts}
         </div>

@@ -55,6 +55,22 @@
   box-shadow: 
     0 0 30px rgba(255, 105, 180, 0.5),
     inset 0 0 20px rgba(255, 255, 255, 0.1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  position: absolute;
+  color: var(--pink-light);
+  font-size: 14px;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 .frame img {
@@ -63,6 +79,7 @@
   object-fit: cover;
   border-radius: 4px;
   image-rendering: auto; /* Photos should NOT be pixelated */
+  transition: opacity 0.3s ease;
 }
 
 .counter {

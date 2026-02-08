@@ -15,10 +15,16 @@ export function SecretGallery({
 }: Readonly<SecretGalleryProps>) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
   const isMobile = useMobile()
 
   const getPhotoSrc = (index: number) => 
     `${import.meta.env.BASE_URL}photos/photo-${String(index + 1).padStart(2, '0')}.jpg`
+
+  // Reset loading state when index changes
+  useEffect(() => {
+    setIsLoading(true)
+  }, [currentIndex])
 
   // Open/close dialog
   useEffect(() => {
@@ -91,10 +97,13 @@ export function SecretGallery({
           </button>
           
           <div className={styles.frame}>
+            {isLoading && <div className={styles.loader}>Loading...</div>}
             <img
               src={getPhotoSrc(currentIndex)}
               alt={`Embarrassing photo ${currentIndex + 1}`}
               className={styles.photo}
+              onLoad={() => setIsLoading(false)}
+              style={{ opacity: isLoading ? 0 : 1 }}
             />
           </div>
           
